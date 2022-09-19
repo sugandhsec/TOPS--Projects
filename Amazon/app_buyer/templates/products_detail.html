@@ -1,0 +1,44 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+
+<!-- contact form -->
+<div class="contact-from-section mt-150 mb-150">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 mb-5 mb-lg-0"></div>
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <div class="form-title">
+          <h2>Product Details Page</h2>
+        </div>
+        <div id="form_status"></div>
+        <div class="contact-form">
+          <h3>{{msg}}</h3>
+          <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data"> 
+            {% csrf_token %}
+            <div class="form-group">
+              <img src="{{products_data_in_html.productpic.url}}" alt="..." class="img-thumbnail">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Product Name</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  placeholder="Enter Full Name" name="fullname" value={{products_data_in_html.productname}}>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Product Price</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  placeholder="Enter email" name="email" value={{products_data_in_html.productprice}} disabled>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Description</label>
+                <textarea name="productdesc" id="message" cols="70" rows="10" placeholder="Enter Message" disabled  >{{products_data_in_html.productdesc}}</textarea>
+              </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-3 mb-5 mb-lg-0"></div>
+    </div>
+  </div>
+</div>
+<!-- end contact form -->
+
+{% endblock %}

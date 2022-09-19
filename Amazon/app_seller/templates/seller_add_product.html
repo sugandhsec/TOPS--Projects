@@ -1,0 +1,50 @@
+{% extends "seller_header.html" %}
+{% load static %}
+{% block content %}
+
+<!-- contact form -->
+<div class="contact-from-section mt-150 mb-150">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 mb-5 mb-lg-0"></div>
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <div class="form-title">
+          <h2>Add New Product Page</h2>
+        </div>
+        <div id="form_status"></div>
+        <div class="contact-form">
+          <h3>{{msg}}</h3>
+          <form method="post" action="{% url 'seller_add_product' %}" enctype="multipart/form-data"> 
+            {% csrf_token %}
+            <div class="form-group">
+              <img src=" " alt="..." class="img-thumbnail">
+              <div class="mb-3">
+                <label for="formFileSm" class="form-label">product Image</label>
+                <input class="form-control form-control-sm" id="formFileSm" type="file" name="propic">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Product Name</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  placeholder="Enter Full Name" name="productname" >
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Product Price</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  placeholder="Enter Full Name" name="productprice" >
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Product Description</label>
+                <textarea name="productdesc" id="message" cols="70" rows="10" placeholder="Enter Message"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Add Product</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-3 mb-5 mb-lg-0"></div>
+    </div>
+  </div>
+</div>
+<!-- end contact form -->
+
+{% endblock %}

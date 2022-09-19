@@ -1,0 +1,50 @@
+{% extends "seller_header.html" %}
+{% load static %}
+{% block content %}
+
+    <!-- contact form -->
+	<div class="contact-from-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+                <div class="col-lg-3 mb-5 mb-lg-0"></div>
+				<div class="col-lg-6 mb-5 mb-lg-0">
+					<div class="form-title">
+						<h2>Registration Page</h2>
+					</div>
+				 	<div id="form_status"></div>
+					<div class="contact-form">
+						<h3>{{msg}}</h3>
+						<form method="post" action="{% url 'seller_register' %}">
+							{% csrf_token %}
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Full Name</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Full Name" name="fullname">
+                              </div>
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Email address</label>
+                              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Mobile No.</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Mobile No." name="mobile">
+                              </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">Password</label>
+                              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Confirm Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password" name="cpassword">
+                              </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </form>
+                          <p>Already Have an account?&nbsp;<a href="{% url 'seller_login' %}" class="link-primary">Login Here</a><p>
+					</div>
+				</div>
+                <div class="col-lg-3 mb-5 mb-lg-0"></div>
+			</div>
+		</div>
+	</div>
+	<!-- end contact form -->
+	
+{% endblock %}

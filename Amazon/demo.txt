@@ -1,0 +1,5 @@
+make migartions  
+
+migrate
+
+runserver

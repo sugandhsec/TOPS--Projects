@@ -1,0 +1,39 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+
+	<!-- product section -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Our</span> Products</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+                {% for i in products_data_in_html %}
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.html"><img src="{{i.productpic.url}}" alt=""></a>
+						</div>
+						<a href={% url 'product_detail' i.id %}><h3>{{i.productname}}</h3></a>
+						<p class="product-price"><span>Per Kg</span> {{i.productprice}} </p>
+						<a href="{% url 'add_to_cart' i.id %}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+
+		</div>
+	</div>
+	<!-- end product section -->
+
+
+
+
+{% endblock %}

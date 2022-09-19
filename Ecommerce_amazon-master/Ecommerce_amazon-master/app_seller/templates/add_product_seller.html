@@ -1,0 +1,76 @@
+{% extends "header_seller.html" %}
+{% load static %}
+
+
+{% block content %}
+    <!-- End Main Top -->
+
+    <!-- Start Main Top -->
+   
+    <!-- End Main Top -->
+
+  
+    <!-- End Top Search -->
+
+    <!-- Start All Title Box -->
+
+    <!-- End All Title Box -->
+
+    <!-- Start Contact Us  -->
+    <div class="contact-box-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-sm-12">
+                </div>
+                <div class="col-lg-8 col-sm-12">
+                    <div class="contact-form-right">
+                        <h2>ADD PRODUCT </h2>
+                        
+                        <form method="post" action="{% url 'add_product_seller' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>{{msg}}</p>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="name" name="pname" placeholder="Enter Product Name" required data-error="Please enter your product name">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Enter Product Price " id="email" class="form-control" name="price" required data-error="Please enter your product price">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="myfile">Select product Image:</label>
+                                        <input type="file" id="myfile" name="pic" >
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="submit-button text-center">
+                                        <input type="submit" name="addproduct">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Cart -->
+
+    <!-- Start Instagram Feed  -->
+  
+    <!-- End Instagram Feed  -->
+
+
+    <!-- Start Footer  -->
+   
+    <!-- End Footer  -->
+{% endblock %}

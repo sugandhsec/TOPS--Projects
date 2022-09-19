@@ -1,0 +1,55 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+
+<!-- contact form -->
+<div class="contact-from-section mt-150 mb-150">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 mb-5 mb-lg-0"></div>
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <div class="form-title">
+          <h2>Profile Page</h2>
+        </div>
+        <div id="form_status"></div>
+        <div class="contact-form">
+          <h3>{{msg}}</h3>
+          <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data"> 
+            {% csrf_token %}
+            <div class="form-group">
+              <img src="{{user_data.pic.url}}" alt="..." class="img-thumbnail">
+              <div class="mb-3">
+                <label for="formFileSm" class="form-label">Change Profile Image</label>
+                <input class="form-control form-control-sm" id="formFileSm" type="file" name="pic">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Full Name</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  placeholder="Enter Full Name" name="fullname" value={{user_data.fullname}}>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  placeholder="Enter email" name="email" value={{user_data.email}} disabled>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Mobile No.</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  placeholder="Enter Mobile No." name="mobile" value={{user_data.mobile}}>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                  name="password" value={{user_data.password}}>
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-3 mb-5 mb-lg-0"></div>
+    </div>
+  </div>
+</div>
+<!-- end contact form -->
+
+{% endblock %}

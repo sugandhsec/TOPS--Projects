@@ -1,0 +1,38 @@
+{% extends "seller_header.html" %}
+{% load static %}
+{% block content %}
+    <!-- contact form -->
+	<div class="contact-from-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+                <div class="col-lg-3 mb-5 mb-lg-0"></div>
+				<div class="col-lg-6 mb-5 mb-lg-0">
+					<div class="form-title">
+						<h2>Login Page</h2>
+					</div>
+				 	<div id="form_status"></div>
+					<div class="contact-form">
+						<h3>{{msg}}</h3>
+						<form method="post" action="{% url 'seller_login' %}">
+							{% csrf_token %}
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Email address</label>
+                              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">Password</label>
+                              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                          </form>
+						  <p>Don't Have an account?&nbsp;<a href="{% url 'seller_register' %}" class="link-primary">Register Here</a><p>
+					</div>
+				</div>
+                <div class="col-lg-3 mb-5 mb-lg-0"></div>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+	<!-- end contact form -->
+	<!-- footer -->
+	

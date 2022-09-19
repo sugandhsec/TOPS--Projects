@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+input[type=button],input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=button],input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=button],input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+<body>
+
+<h3>Using CSS to style an HTML Form</h3>
+
+<div>
+  <form>
+      {% csrf_token %}
+    <label for="fname">Name</label>
+    <input type="text" id="name" name="name" placeholder="Your name.." required>
+
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" placeholder="Your Email.." required>
+
+    <label for="mobile">Mobile</label>
+    <input type="text" id="mobile" name="mobile" placeholder="Your Last Mobile.." required>
+
+    <input type="button" onclick="createdata()" value="Submit">
+  </form>
+</div>
+
+
+
+<style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #customers tr:hover {background-color: #ddd;}
+    
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04AA6D;
+      color: white;
+    }
+    </style>
+    </head>
+    <body>
+    
+    <h1>A Fancy Table</h1>
+    
+    <table id="customers">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      {% for single_data in key %}
+      <tbody id="tbody">
+      <tr>
+        <td>{{single_data.name}}</td>
+        <td>{{single_data.email}}</td>
+        <td>{{single_data.mobile}}</td>
+        <td><button onclick="deletedata({{single_data.id}})" >Delete</button></td>
+      </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+
+<script>
+    function createdata(){
+        let data1 = {
+            'name' : $("#name").val() ,
+            'email' : $("#email").val() ,
+            'mobile' : $("#mobile").val(),
+            'csrfmiddlewaretoken' : $("input[name='csrfmiddlewaretoken']").val()
+        }
+
+        $.ajax({
+            url : "{% url 'createdata' %}" ,
+            data : data1,
+            method : 'POST',
+            success : function(response){
+                x = response.alldata
+                s = ''
+                for(i=0;i<x.length;i++){
+                  s += `<tr>
+                          <td>${x[i].name}</td>
+                          <td>${x[i].email}</td>
+                          <td>${x[i].mobile}</td>
+                        </tr>` 
+                }
+                $("#tbody").html(s)
+
+            }
+        })
+    }
+
+    function deletedata(pk){
+      data2 = {
+        'id' : pk,
+        'csrfmiddlewaretoken' : $("input[name='csrfmiddlewaretoken']").val()
+      }
+
+      $.ajax({
+        url : "{% url 'deleterow' %}",
+        data : data2,
+        method : 'POST',
+        success : function(response){
+          alert(response.msg)
+          x = response.alldata
+                s = ''
+                for(i=0;i<x.length;i++){
+                  s += `<tr>
+                          <td>${x[i].name}</td>
+                          <td>${x[i].email}</td>
+                          <td>${x[i].mobile}</td>
+                          <td><button onclick="deletedata(${x[i].id})" >Delete</button></td>
+                        </tr>` 
+                }
+                $("#tbody").html(s)
+        }
+      })
+
+    }
+
+</script>
+</body>
+</html>
+
+
