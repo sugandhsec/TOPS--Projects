@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+import os.path
 
 from pathlib import Path
 import os
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'pro_amazon.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['app_buyer.templates','app_seller.templates'],
+        'DIRS': ['app_buyer.templates', 'app_seller.templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'pro_amazon.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -118,7 +119,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_ROOT = ''
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (os.path.join('static'), )
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -134,7 +139,7 @@ EMAIL_HOST_PASSWORD = 'hysszwapgioppufg'
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 RAZOR_KEY_ID = "rzp_test_TpJgtsNOaPKkVf"
 RAZOR_KEY_SECRET = 'wbeP0zSmFUAiSAZM6FVgQFiJ'

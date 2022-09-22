@@ -138,7 +138,29 @@ def add_to_cart(request, pk):
     )
     return render(request, 'home.html', {'user_data': session_user_data, })
 
+def cart(request):
+    session_user_data = User.objects.get(email=request.session['email'])
+    cart_data=Cart.objects.filter(userid=session_user_data,orderid=order_id)
+    return render(request,"cart.html",{'cart_data':cart_data,'user_data':session_user_data})
 
+def remove_cart(request,pk):
+    prod=Cart.objects.get(id=pk)
+    prod.delete()
+    session_user_data = User.objects.get(email=request.session['email'])
+    cart_data=Cart.objects.filter(userid=session_user_data,orderid=order_id)
+    return render(request,"cart.html",{'cart_data':cart_data,'user_data':session_user_data})
+
+def checkout(request):
+    session_user_data = User.objects.get(email=request.session['email'])
+    cart_data=Cart.objects.filter(userid=session_user_data)
+    cart_data=cart_data.values()
+    global single_amount
+    single_amount=0
+    for x in cart_data:
+        pro_price=Product.objects.get(id=x['prodcutid_id'])
+        single_amount+=float(pro_price.productprice)
+    amount_user_show=single_amount
+    return render(request,"payment.html",{'total_amt':amount_user_show,'user_data':session_user_data})
 # get---1 line---condition---only exact one line----error more than1 or less than 1
 # all---all line
 # filter---1 se jayda line---condition--more than one line
