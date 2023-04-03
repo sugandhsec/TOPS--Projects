@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 # C:\Users\Sugandh\Desktop\Sugandh Lectures\Projects\Amazon
-#Amazon
+# Amazon
 
 from pathlib import Path
 import os
@@ -133,11 +133,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'sugandhdjango@gmail.com'
-EMAIL_HOST_PASSWORD ='uuwctmbtkwslshtk'
+EMAIL_HOST_USER = 'sugandhg112@gmail.com'
+EMAIL_HOST_PASSWORD = 'afhvmiwssajthzzx'
 
-MEDIA_URL='/media/'
-MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-RAZOR_KEY_ID = 'rzp_test_5PIjby5Vpo4bXg'
-RAZOR_KEY_SECRET = 'N1zPsWHgqjbphsf1qzvLPCy6'
+RAZOR_KEY_ID = 'rzp_test_jngfW1PEwE1gFB'
+RAZOR_KEY_SECRET = 'N8AkHY9BL1PCPeaGHGrNFktM'

@@ -1,0 +1,47 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+
+    </head>
+	<body>
+		
+<h1>Visitor Data</h1>
+<h4><li><a href="{% url 'back' %}">Home</a></li></h4>
+<hr>  <!-- hr tag for horizontal line-->
+Name : {{user_det.fname}}<br>
+	Last Name : {{user_det.lname}}<br>
+	Mobile : {{user_det.mobile}}<br>
+	Address : {{user_det.address}}<br>
+	Gender : {{user_det.gender}}<br>
+	<!--Status : {{i.current_status}}<br>-->
+	Company Name : {{user_det.cname}}<br>
+	Purpose : {{user_det.purpose}}<br>
+	tosee : {{user_det.tosee}}<br>
+<form action="{% url 'visitor_entry' user_det.id %}" method="post">
+
+
+	{% csrf_token %}
+
+	{{msg}}
+	
+	
+		
+	<button type="submit" class="primary-btn order-submit">Entry </button>
+	
+	
+	
+	<hr size="25px">
+</form>
+
+
+
+		
+		
+	</body>
+</html>
+{% endblock %}

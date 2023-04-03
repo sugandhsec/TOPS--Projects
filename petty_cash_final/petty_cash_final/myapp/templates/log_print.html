@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      button {
+        appearance: none;
+        background-color: #2ea44f;
+        border: 1px solid rgba(27, 31, 35, 0.15);
+        border-radius: 6px;
+        box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+          sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+        padding: 6px 16px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- hr tag for horizontal line-->
+
+    <div id="hello">
+      <div class="col-md-6">
+        <strong>Receipt </strong><br />
+        <div class="table-responsive">
+          <table class="table table-user-information">
+            <tbody>
+              <tr>
+                <td>
+                  <strong>
+                    <span
+                      class="glyphicon glyphicon-asterisk text-primary"
+                    ></span>
+                    Name
+                  </strong>
+                </td>
+                <td class="text-primary">
+                  {{user_det.fname}} {{user_det.lname}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>
+                    <span
+                      class="glyphicon glyphicon-asterisk text-primary"
+                    ></span>
+                    Emp Code
+                  </strong>
+                </td>
+                <td class="text-primary">{{user_det.emp_code}}</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <strong>
+                    <span
+                      class="glyphicon glyphicon-asterisk text-primary"
+                    ></span>
+                    Amount
+                  </strong>
+                </td>
+                <td class="text-primary">
+                  <span id="myamount">{{user_det.amount}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>
+                    <span
+                      class="glyphicon glyphicon-asterisk text-primary"
+                    ></span>
+                    Reason
+                  </strong>
+                </td>
+                <td class="text-primary">{{user_det.reason}}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>
+                    <span
+                      class="glyphicon glyphicon-asterisk text-primary"
+                    ></span>
+                    Time
+                  </strong>
+                </td>
+                <td class="text-primary">{{user_det.date}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <button onclick="printingdata()">Print</button>
+  </body>
+  <script type="text/javascript">
+    function printingdata() {
+      var print_div = document.getElementById("hello");
+      var print_area = window.open();
+      print_area.document.write(print_div.innerHTML);
+      print_area.document.close();
+      print_area.focus();
+      print_area.print();
+      // print_area.close();
+      // This is the code print a particular div element
+    }
+  </script>
+</html>

@@ -1,0 +1,89 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<style>
+		table,
+		th,
+		td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			color: black;
+			font-weight: bold;
+		}
+
+		th,
+		td {
+			padding: 10px;
+		}
+
+		table#alter tr:nth-child(even) {
+			background-color: #eee;
+		}
+
+		table#alter tr:nth-child(odd) {
+			background-color: #fff;
+		}
+
+		table#alter th {
+			color: white;
+			background-color: gray;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<h1>Petty Cash Data</h1>
+	<h4>
+		<li><a href="{% url 'back' %}">Home</a></li>
+		<center style="color:red">{{msg}}</center>
+	</h4>
+	<hr> <!-- hr tag for horizontal line-->
+	<table id="alter">
+		<tr>
+			<th>NAME</th>
+			<th>Last Name</th>
+			<th>Emp Code</th>
+			<th>Email ID</th>
+			<th>Amount</th>
+			<th>Reason</th>
+			<th>Exit</th>
+			<th>Send Mail</th>
+			<th>Return</th>
+		</tr>
+		{% for i in signups %}
+		<form action="{% url 'exit_user' i.id %}" method="post">
+			{% csrf_token %}
+			<tr>
+				<td> {{i.fname}}</td>
+				<td>{{i.lname}} </td>
+				<td>{{i.emp_code}} </td>
+				<td>{{i.email}} </td>
+				<td>{{i.amount}} </td>
+				<td>{{i.reason}} </td>
+				<td><button type="submit" class="primary-btn order-submit">Exit </button> </td>
+				<td><a href="{% url 'send_email' i.id %}"><button type="button" class="primary-btn order-submit">Send
+							Mail</button></a> </td>
+				<td><a href="{% url 'return_amount' i.id %}"><button type="button"
+							class="primary-btn order-submit">Return Amount</button></a> </td>
+				<br>
+				<!-- <div><button onClick="window.print()">Print this page</button></div> -->
+				<hr size="25px">
+		</form>
+		{% endfor %}
+		</tr>
+	</table>
+
+
+
+
+</body>
+
+</html>
+{% endblock %}

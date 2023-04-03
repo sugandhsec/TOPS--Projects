@@ -1,0 +1,35 @@
+first of all from any page transfer to another page 
+we make urls , inside urls in the view section there
+is logic of code
+
+class User(models.Model):
+    username = models.TextField(max_length=30)
+    password = models.TextField(max_length=30)
+    firstname = models.TextField(max_length=20)
+    lastname = models.TextField(max_length=20)
+    emailid = models.EmailField()
+
+	def __str__(self) -> str:
+        return self.firstname
+
+python manage.py makemigrations
+python manage.py migrate
+
+inside admin.py file 
+from app_buyer import views
+
+admin.site.register(models.User)
+
+for admin panel
+
+python manage.py createsuperuser
+admin username----
+email---blank
+pasword---invisible
+cpass----invisible
+y
+
+Set-ExecutionPolicy Unrestricted -Force
+
+href="reghrhththerligjgjgjkl"
+href="{% static 'erligjgjgjkl' %}"

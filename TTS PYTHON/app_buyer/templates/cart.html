@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Ecommerce Cart</title>
+    <style>
+      .cart-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        text-align: left;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      input[type="number"] {
+        width: 50px;
+        padding: 5px;
+        font-size: 16px;
+        text-align: center;
+      }
+
+      button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cart-container">
+      <h1>My Ecommerce Cart</h1>
+      <table>
+        {% for i in all_cart%}
+        <tr>
+          <th>Item</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+        <tr>
+          <td>{{i.product_detail.product_name}}</td>
+          <td>${{i.product_detail.product_price}}</td>
+          <td>
+            <input type="number" min="1" value="1" />
+          </td>
+          <td>${{i.product_detail.product_price}}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+          <td colspan="3">Subtotal:</td>
+          <td>Rs.{{total}}</td>
+        </tr>
+        <tr>
+          <td colspan="3">Shipping:</td>
+          <td>$5.00</td>
+        </tr>
+        <tr>
+          <td colspan="3">Total:</td>
+          <td>$54.98</td>
+        </tr>
+      </table>
+       <button class="btn" id="pay-btn">Checkout</button>
+    </div>
+  </body>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    var options = {
+      // Enter the Key ID generated from the Dashboard
+      key: 'rzp_test_BfILxF2wKUYf15',
+
+      // Amount is in currency subunits.
+      // Default currency is INR. Hence,
+      // 50000 refers to 50000 paise
+      amount: {{total}}*100,
+      currency: "INR",
+
+      // Your/store name.
+      name: "Dj Razorpay",
+
+      // Pass the `id` obtained in the response of Step 1
+      order_id: "{{ razorpay_order_id }}",
+      callback_url: "{{ callback_url }}",
+    };
+
+    // initialise razorpay with the options.
+    var rzp1 = new Razorpay(options);
+
+    // add event listener to the payment button.
+    document.getElementById("pay-btn").onclick = function (e) {
+      rzp1.open();
+      e.preventDefault();
+    };
+  </script>
+</html>

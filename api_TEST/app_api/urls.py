@@ -5,3 +5,4 @@ urlpatterns = [
     path('',views.api,name="api"),
     path('getempl/', views.userList.as_view())
 ]
+

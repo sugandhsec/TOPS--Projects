@@ -1,0 +1,114 @@
+
+
+<!DOCTYPE html>
+<html>
+<style>
+input[type=button],input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=button],input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=button],input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+<body>
+
+<h3>Using CSS to style an HTML Form</h3>
+
+<div>
+    <p>{{msg}}</p>
+  <form action="{% url 'dataentry' %}" method="post">
+      {% csrf_token %}
+    <label for="fname">Name</label>
+    <input type="text" id="name" name="name" placeholder="Your name.." value="{{one_user_data.name}}" required>
+
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" placeholder="Your Email.." value="{{one_user_data.email}}"required>
+
+    <label for="mobile">Mobile</label>
+    <input type="text" id="mobile" name="mobile" placeholder="Your Last Mobile.." value="{{one_user_data.mobile}}"required>
+
+    <input type="submit" >
+  </form>
+</div>
+
+
+
+<style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #customers tr:hover {background-color: #ddd;}
+    
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04AA6D;
+      color: white;
+    }
+    </style>
+    </head>
+    <body>
+    
+    <h1>A Fancy Table</h1>
+    
+    <table id="customers">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody id="tbody">
+        {% for i in user_data%}
+      <tr>
+        <td>{{i.name}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.mobile}}</td>
+        <td><a href="{% url 'delete' i.id%}">delete</a>
+            <a href="{% url 'update' i.id%}">update</a>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+</body>
+</html>
+

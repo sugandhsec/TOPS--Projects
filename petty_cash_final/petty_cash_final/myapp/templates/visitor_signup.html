@@ -1,0 +1,300 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+	
+	<script type="text/javascript"> //below script tag for java script all the java script should be in script tag function is inbuild libery
+	
+		function checkFname()
+		{
+			var f=document.frm.fname.value; 
+			var reg=/^[A-Za-z]+$/; // allow only A-Z means all capital alphabet A to Z and a-z means all small alphabet, + means check whole text box data means check [a to z]
+			if (f=="") // means blanck, if text box blanck then below error show
+		{
+			document.getElementById("fname").innerHTML="Please Enter First Name";  //this is linked from span tag.
+		}
+		else if(!reg.test(f))    // if data not match with second var (verialble) then below error show, ! means not
+		{
+			document.getElementById("fname").innerHTML="Please Enter Only Alphabets"; //this is linked from span tag.
+		}
+		else
+		{
+			document.getElementById("fname").innerHTML="";   // "" means if data correct then no error 
+
+		}
+
+		}
+		function checkLname()
+		{
+			var l=document.frm.lname.value;  
+			var reg=/^[A-Za-z]+$/; 
+			if (l=="")
+		{
+			document.getElementById("lname").innerHTML="Please Enter Last Name";
+		}
+		else if(!reg.test(l))
+		{
+			document.getElementById("lname").innerHTML="Please Enter Only Alphabets";
+		}
+		else
+		{
+			document.getElementById("lname").innerHTML="";
+
+		}
+		
+		}
+		function checkEmail()
+		{
+			var e=document.frm.email.value; 
+			var reg=/^[A-Za-z0-9-_.]+@[A-Za-z]+\.[A-Za-z]{2,4}$/;  // \. means consider special character
+			if (e=="")
+		{
+			document.getElementById("email").innerHTML="Please Enter Your mail ID"; 
+		}
+		else if(!reg.test(e))
+		{
+			document.getElementById("email").innerHTML="Please Enter Valid Email";
+		}
+		else
+		{
+			document.getElementById("email").innerHTML="";
+
+		}
+
+		}
+		function checkMobile()
+		{
+			var m=document.frm.mobile.value; 
+			var reg=/^\d{10}$/;  // \d means int value only and 10 means 10 digit allow only  
+			if (m=="")
+		{
+			document.getElementById("mobile").innerHTML="Please Enter Your Mobile Number"; 
+		}
+		else if(!reg.test(m))
+		{
+			document.getElementById("mobile").innerHTML="Please Enter 10 Digit Mobile Number";
+		}
+		else
+		{
+			document.getElementById("mobile").innerHTML="";
+
+		}
+
+		}
+		function checkPassword()
+		{
+			var p=document.frm.password.value; 
+			var reg=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;  // \d means int value only and second for small letter and third for capital and fourth for special character and fifth \s means space is not allow in password and six for password lenght for min and max  
+			if (p=="")
+		{
+			document.getElementById("password").innerHTML="Please Enter Password"; 
+		}
+		else if(!reg.test(p))
+		{
+			document.getElementById("password").innerHTML="Min 1 Upper,Lower,Digit,Special(8,15)";
+		}
+		else
+		{
+			document.getElementById("password").innerHTML="";
+
+		}
+
+		}
+		function checkCPassword()
+		{
+			var p1=document.frm.password.value; 
+			var p2=document.frm.cpassword.value; 
+			
+			if (p2=="")
+		{
+			document.getElementById("cpassword").innerHTML="Please Enter Password"; 
+		}
+		else if(p1!=p2)
+		{
+			document.getElementById("cpassword").innerHTML="Password and Confirm Password Does Not Match";
+		}
+		else
+		{
+			document.getElementById("cpassword").innerHTML="";
+
+		}
+
+		}
+
+	</script> 
+
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">Visitor Enrollment</h3>
+						<ul class="breadcrumb-tree">
+							<li><a href="{% url 'back' %}">Home</a></li>
+							
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								
+							</div>
+							{% if msg %}
+								<b style="color: blue;">{{msg}}</b>
+							{% endif %}
+							
+							<form name="signup" method="post" action="{% url 'signup' %}" enctype="multipart/form-data">
+								{% csrf_token %}
+								
+							<div class="form-group">
+								
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="fname" placeholder="First Name" required>
+							
+
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="lname" placeholder="Last Name" required>
+							</div>
+							<div class="form-group">
+								<!--<input class="input" type="email" name="email" placeholder="Email" id="email">-->
+								<span id="email_error" style="color: red;"></span>
+							</div>
+							<div class="form-group">
+								<input class="input" type="tel" name="mobile" placeholder="mobile" required>
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="address" placeholder="Address" required>
+							</div>
+							<tr align="center">
+							<td>Gender</td>
+							<td><input type="radio" value="male" name="gender" required>Male
+							<td><input type="radio" value="female" name="gender" required>Female
+							</td>
+							<br><br>
+							
+							<!--<td>Entry Status</td>
+							<td><input type="radio" value="in" name="entry">In
+							<!--<td><input type="radio" value="exit" name="entry">Exit-->
+							</td>
+							
+							
+							
+							<div class="form-group">
+								<input class="input" type="text" name="cname" placeholder="Company Name" required>
+							</div>
+							<div class="form-group">
+								<input class="input" type="tel" name="purpose" placeholder="Purpose" required>
+							</div>
+							<div class="form-group">
+								
+								<input class="input" type="text" name="tosee" placeholder="To See" required>
+							</div>
+							<div class="form-group">
+								
+								<input class="input" type="text" name="todepartment" placeholder="To Department" required>
+							</div>
+							<div class="form-group">
+								
+								
+							</div>
+							
+							<button type="submit" class="primary-btn order-submit">Submit </button>
+							<a href="{% url 'back' %}"><button type="button" class="primary-btn order-submit">Back</button></a><br><br>
+							
+							
+						</div>
+					
+					</div>
+
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- NEWSLETTER -->
+		<div id="newsletter" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="newsletter">
+							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
+							<form>
+								<input class="input" type="email" placeholder="Enter Your Email">
+								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+							</form>
+							<ul class="newsletter-follow">
+								<li>
+									<a href="#"><i class="fa fa-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-instagram"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-pinterest"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /NEWSLETTER -->
+		<script>
+          $("#email").change(function(){
+            var email=$(this).val();
+
+            $.ajax({
+              url: '/ajax/validate_email/',
+              data: {
+                'email': email
+              },
+              dataType: 'json',
+              success: function (data) {
+                if (!data.is_taken) {
+                  document.getElementById("email").style.border="5px solid red";
+                  document.getElementById("email_error").innerHTML="Email Id Already Registered";
+                }else{
+                  document.getElementById("email").style.border="5px solid green";
+                  document.getElementById("email_error").innerHTML="";
+                }
+              }
+            });
+          });
+
+        </script>
+
+	
+
+	</body>
+</html>
+{% endblock %}

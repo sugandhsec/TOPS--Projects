@@ -1,0 +1,120 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+    </head>
+	<body>
+		
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+                        <h4><li><a href="{% url 'back' %}">Home</a></li></h4>
+						<!--<h3 class="breadcrumb-header">Login</h3>
+						<ul class="breadcrumb-tree">
+							<li><a href="#">Home</a></li>-->
+							<!--<li class="active">Login</li>-->
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">Send E-Mail Information</h3>
+							</div>
+							{% if msg %}
+								<b style="color:blue;">{{msg}}</b>
+							{% endif %}
+                            <form name="login" method="post" action="{% url 'send_email' signups.id %}">
+							<span id="email_error"></span>
+							<!--<form name="login" method="post" action="{% url 'login' %}">-->
+                                
+								{% csrf_token %}
+
+                                First Name : {{signups.fname}}<br>
+                                Last Name : {{signups.lname}}<br>
+                                Emp Code : {{signups.emp_code}}<br>
+                                Email ID : {{signups.email}}<br>
+                                Reason : {{signups.reason}}<br>
+								Amount : {{signups.amount}}<br><br>
+							<!--<div class="form-group">
+								<input class="input" type="email" name="email" placeholder="Email" id="email">
+							</div>
+							<div class="form-group">
+								<input class="input" type="password" name="password" placeholder="Password">
+							</div>-->
+							
+							<!--<button type="submit" class="primary-btn order-submit">New Visitor Entry</button>-->
+                            <div class="form-group">
+								<input class="input" type="email" name="email" placeholder="Email">
+							</div>
+						
+							
+							<button type="submit" class="primary-btn order-submit">Send MAIL</button>
+							
+						<!--</div>
+							<a href="{% url 'signup' %}"><button type="button" class="primary-btn order-submit">New Visitor Entry</button></a><br><br>
+							<a href="{% url 'visitor_view' %}"><button type="button" class="primary-btn order-submit">View All Visitor Entry</button></a>
+							<br><br>
+							<a href="{% url 'visitor_exit' %}"><button type="button" class="primary-btn order-submit">View In Visitor</button></a>
+						</div>-->
+                        	
+                    </form>
+						
+					</div>
+
+                </div>
+<!-- /row -->
+</div>
+<!-- /container -->
+</div>
+<!-- /SECTION -->
+
+
+<script>
+$("#email").change(function(){
+var email=$(this).val();
+
+$.ajax({
+url: '/ajax/validate_email/',
+data: {
+'email': email
+},
+dataType: 'json',
+success: function (data) {
+if (!data.is_taken) {
+document.getElementById("email").style.border="5px solid red";
+document.getElementById("email_error").innerHTML="This Email Id Not Registered";
+}else{
+document.getElementById("email").style.border="5px solid green";
+document.getElementById("email_error").innerHTML="";
+}
+}
+});
+});
+
+</script>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,56 @@
+create environement
+python -m venv environmentname
+
+activate environement
+environementname\Scripts\activate
+
+to check environement is activate or not environement name is in starting of folder path
+
+installing django
+pip install django
+
+create project 
+django-admin startproject projectname .
+
+create app
+django-admin startapp appname
+
+database creation
+python manage.py makemigrations
+
+python manage.py migrate
+
+running the server
+python manage.py runserver
+
+admin side creation
+python manage.py createsuperuser
+enter username---admin
+enter email---skip
+enter password--123(not show dikhega nahi)
+confirm password---123(not show dikhega nahi)
+
+in project urls.py register app.urls.py
+this app ulrs file is not created so create it
+path('',include("app_buyer.urls")) ---project url file
+
+copy same structure of project urls
+path('',views.index,name="index")  ---app url file
+
+now link view but that view is not in views file
+def index(request):
+    return render(request,"index.html")
+
+create template file so we can put all html files inside it 
+ create static file so we can put all css and js files inside it
+
+ before navbar-area
+ after subscribe-area bg-111111
+
+
+ tablename.objects.create(
+    fieldname=value,
+    fieldname=value,
+    fielname=value,
+
+ )

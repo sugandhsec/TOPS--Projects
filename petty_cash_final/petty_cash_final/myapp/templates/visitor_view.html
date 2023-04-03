@@ -1,0 +1,116 @@
+{% extends 'header.html' %} {% load static %} {% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        color: black;
+        font-weight: bold;
+      }
+
+      th,
+      td {
+        padding: 10px;
+      }
+
+      table#alter tr:nth-child(even) {
+        background-color: #eee;
+      }
+
+      table#alter tr:nth-child(odd) {
+        background-color: #fff;
+      }
+
+      table#alter th {
+        color: white;
+        background-color: gray;
+      }
+    </style>
+    <!-- <script type="text/javascript">
+      function printingdata() {
+        var print_div = document.getElementById("hello");
+        var print_area = window.open();
+        print_area.document.write(print_div.innerHTML);
+        print_area.document.close();
+        print_area.focus();
+        print_area.print();
+        // print_area.close();
+        // This is the code print a particular div element
+      }
+    </script> -->
+  </head>
+
+  <body>
+    <h1>Visitor Data</h1>
+    <h4>
+      <li><a href="{% url 'back' %}">Home</a></li>
+    </h4>
+
+    <hr />
+    <!-- hr tag for horizontal line-->
+    <table id="alter">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Emp Code</th>
+        <th>Reason</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Petty Amount</th>
+        <th>Date</th>
+        <th>Print</th>
+      </tr>
+      {% for i in log_data %}
+
+      <tr>
+        <td>{{i.fname}}</td>
+        <td>{{i.lname}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.emp_code}}</td>
+        <td>{{i.reason}}</td>
+        <td>{{i.amount}}</td>
+        <td>{{i.type}}</td>
+        <td>{{i.petty_amount}}</td>
+        <td>{{i.date}}</td>
+        <!-- <div id="hello" hidden>
+          <pre>Name  :  {{i.fname}} {{i.lname}}</pre>
+          <pre>Email  :{{i.email}}</pre>
+          <pre>Emp Code  :{{i.emp_code}}</pre>
+          <pre>Reason:   {{i.reason}}</pre>
+          <pre>Amount   :  {{i.amount}} </pre>
+          <pre>Time  :  {{i.date}} </pre>
+        </div> -->
+        <td>
+          <button
+            style="
+              background-color: #15161d;
+              border-radius: 20px;
+              border: 1px solid black;
+            "
+          >
+            <a
+              style="font-weight: bold; color: rgb(248, 248, 248)"
+              href="{% url 'log_print' i.id %}"
+              target="_blank"
+              >Print</a
+            >
+          </button>
+          <!-- <input
+            type="button"
+            value="Print"
+            class="primary-btn order-submit"
+            onclick="printingdata()"
+          /> -->
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
+{% endblock %}

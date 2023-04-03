@@ -1,0 +1,106 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+    </head>
+	<body>
+		
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<!--<h3 class="breadcrumb-header">Login</h3>
+                     
+						<ul class="breadcrumb-tree">
+							<li><a href="#">Home</a></li>-->
+							<!--<li class="active">Login</li>-->
+                     <h4><li><a href="{% url 'back' %}">Home</a></li></h4>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">Welcome</h3>
+							</div>
+							{% if msg %}
+								<b style="color:blue;">{{msg}}</b>
+							{% endif %}
+							<span id="email_error"></span>
+							<!--<form name="login" method="post" action="{% url 'login' %}">-->
+								{% csrf_token %}
+							
+							<!--<div class="form-group">
+								<input class="input" type="email" name="email" placeholder="Email" id="email">
+							</div>
+							<div class="form-group">
+								<input class="input" type="password" name="password" placeholder="Password">
+							</div>-->
+							
+							<!--<button type="submit" class="primary-btn order-submit">New Visitor Entry</button>-->
+							<a href="#"><button type="button" class="primary-btn order-submit">Open Camera</button></a><br><br>
+							<a href="#"><button type="button" class="primary-btn order-submit">Capture Image</button></a>
+							<br><br>
+							
+						</div>
+						<!-- /Billing Details -->
+
+						
+
+						
+					</div>
+
+									</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+	
+		<script>
+          $("#email").change(function(){
+            var email=$(this).val();
+
+            $.ajax({
+              url: '/ajax/validate_email/',
+              data: {
+                'email': email
+              },
+              dataType: 'json',
+              success: function (data) {
+                if (!data.is_taken) {
+                  document.getElementById("email").style.border="5px solid red";
+                  document.getElementById("email_error").innerHTML="This Email Id Not Registered";
+                }else{
+                  document.getElementById("email").style.border="5px solid green";
+                  document.getElementById("email_error").innerHTML="";
+                }
+              }
+            });
+          });
+
+        </script>
+	</body>
+</html>
+{% endblock %}

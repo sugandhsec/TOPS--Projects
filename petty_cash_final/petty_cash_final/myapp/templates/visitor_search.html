@@ -1,0 +1,34 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+
+    </head>
+	<body>
+		
+<h1>Petty Cash Data</h1>
+<h4><li><a href="{% url 'back' %}">Home</a></li></h4>
+							{% if msg %}
+								<b style="color: blue;">{{msg}}</b>
+							{% endif %}
+
+	<hr>  <!-- hr tag for horizontal line-->
+	<form name="signup" method="post" action="{% url 'visitor_search' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" placeholder="Type Emp Code.." required name="emp_code">
+        <button type="submit"><i class="fa fa-search"></i></button>
+        <br><br><br>
+
+	<button type="submit" class="primary-btn order-submit">Search </button>
+      </form>
+
+
+		<br><br><br>
+		
+	</body>
+</html>
+{% endblock %}

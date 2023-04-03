@@ -1,0 +1,93 @@
+open terminal
+
+create virtual environement
+python -m venv environmentname_your_choice
+
+activate your environement
+environement_name\Scripts\activate
+
+download django
+pip install django
+
+create project 
+django-admin startproject projectname_your_choice .
+
+create app_for project
+django-admin startapp appname_your_choice
+
+creating database
+python manage.py makemigrations
+python manage.py migrate
+
+
+for running project 
+python manage.py runserver
+
+for creating admin site
+
+python manage.py createsuperuser
+
+enter username---admin
+email---skip
+password---123
+confirm password--123
+yes---by prssing y
+
+register your app inside your project settings.py file
+installes apps=[
+
+    "app_name",
+]
+
+
+create header_footer.html page in template
+
+search navbar-area class
+then minmize that class div
+and copy whole above section into header_footer.html
+
+{% block content %}
+
+
+{% endblock %}
+
+thern search
+subscribe-area bg-111111
+
+paste after endblock
+
+in starting
+{% extends "header_footer.html" %}
+{% load static %}
+{% block content %}
+
+in ending
+
+{% endblock %}
+
+
+tablename.objects.create
+(
+    fielname=value,
+    fieldname=values,
+)
+
+
+Email Sending steps
+
+1---goto project settings.py file
+goto last line and paste the code there
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = #sender's email-id
+EMAIL_HOST_PASSWORD = #password associated with above email-id
+
+
+goto views.py and paste two lines at top 
+
+from django.conf import settings
+from django.core.mail import send_mail
+

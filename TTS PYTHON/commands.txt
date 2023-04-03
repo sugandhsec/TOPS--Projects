@@ -1,0 +1,49 @@
+For virtual environment create
+    python -m venv environmentname
+
+activating virtual environement
+    environementname\Scripts\activate
+
+installing django
+    pip install django
+
+
+creating project
+    django-admin startproject projectname .
+
+creating app
+    django-admin startapp appname
+
+regitser app in settings.py file of project folder
+in installed apps section
+'appname',
+
+creating database
+    python manage.py makemigrations
+    python manage.py migrate
+
+for running server 
+    python manage.py runserver
+
+link project urls file with app urls file but there is no url file in app
+create a urls.py named file
+
+and copy the content of project urls file into it
+
+
+In app urls.py file every urls is in form of below given format but for importing view from app 
+
+from appname import views
+
+path('urlaname/',views.functionname,name="urlname_for_project")
+
+
+in views.py file create functionname
+
+def viewname(request):
+    return render(request,"htmml page name")
+
+we have to put our all html files in template folder 
+template folder is inside the app folder
+
+

@@ -14,6 +14,7 @@ from django.http import HttpResponseBadRequest
 razorpay_client = razorpay.Client(
     auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
 
+
 def index(request):
     try:
         user_data = User.objects.get(email=request.session['email'])
@@ -144,41 +145,44 @@ def add_to_cart(request, pk):
     )
     return render(request, 'home.html', {'user_data': session_user_data, })
 
+
 def cart(request):
     session_user_data = User.objects.get(email=request.session['email'])
-    cart_data=Cart.objects.filter(userid=session_user_data,orderid=order_id)
-    return render(request,"cart.html",{'cart_data':cart_data,'user_data':session_user_data})
+    cart_data = Cart.objects.filter(userid=session_user_data, orderid=order_id)
+    return render(request, "cart.html", {'cart_data': cart_data, 'user_data': session_user_data})
 
-def remove_cart(request,pk):
-    prod=Cart.objects.get(id=pk)
+
+def remove_cart(request, pk):
+    prod = Cart.objects.get(id=pk)
     prod.delete()
     session_user_data = User.objects.get(email=request.session['email'])
-    cart_data=Cart.objects.filter(userid=session_user_data,orderid=order_id)
-    return render(request,"cart.html",{'cart_data':cart_data,'user_data':session_user_data})
+    cart_data = Cart.objects.filter(userid=session_user_data, orderid=order_id)
+    return render(request, "cart.html", {'cart_data': cart_data, 'user_data': session_user_data})
+
 
 def checkout(request):
     session_user_data = User.objects.get(email=request.session['email'])
-    cart_data=Cart.objects.filter(userid=session_user_data)
-    cart_data=cart_data.values()
+    cart_data = Cart.objects.filter(userid=session_user_data)
+    cart_data = cart_data.values()
     global single_amount
-    single_amount=0
+    single_amount = 0
     for x in cart_data:
-        pro_price=Product.objects.get(id=x['prodcutid_id'])
-        single_amount+=float(pro_price.productprice)
-    amount_user_show=single_amount
+        pro_price = Product.objects.get(id=x['prodcutid_id'])
+        single_amount += float(pro_price.productprice)
+    amount_user_show = single_amount
 
     currency = 'INR'
     amount = amount_user_show*100  # Rs. 200
- 
+
     # Create a Razorpay Order
     razorpay_order = razorpay_client.order.create(dict(amount=amount,
                                                        currency=currency,
                                                        payment_capture='0'))
- 
+
     # order id of newly created order.
     razorpay_order_id = razorpay_order['id']
     callback_url = 'paymenthandler/'
- 
+
     # we need to pass these details to frontend.
     context = {}
     context['razorpay_order_id'] = razorpay_order_id
@@ -186,18 +190,20 @@ def checkout(request):
     context['razorpay_amount'] = amount
     context['currency'] = currency
     context['callback_url'] = callback_url
-    context['total_amt']=amount_user_show
-    return render(request,"payment.html",context=context)
+    context['total_amt'] = amount_user_show
+    return render(request, "payment.html", context=context)
 # get---1 line---condition---only exact one line----error more than1 or less than 1
 # all---all line
 # filter---1 se jayda line---condition--more than one line
+
+
 @csrf_exempt
 def paymenthandler(request):
- 
+
     # only accept POST request.
     if request.method == "POST":
         try:
-           
+
             # get the required parameters from post request.
             payment_id = request.POST.get('razorpay_payment_id', '')
             razorpay_order_id = request.POST.get('razorpay_order_id', '')
@@ -207,29 +213,29 @@ def paymenthandler(request):
                 'razorpay_payment_id': payment_id,
                 'razorpay_signature': signature
             }
- 
+
             # verify the payment signature.
             result = razorpay_client.utility.verify_payment_signature(
                 params_dict)
             if result is not None:
                 amount = 20000  # Rs. 200
                 try:
- 
+
                     # capture the payemt
                     razorpay_client.payment.capture(payment_id, amount)
- 
+
                     # render success page on successful caputre of payment
                     return render(request, 'paymentsuccess.html')
                 except:
- 
+
                     # if there is an error while capturing payment.
                     return render(request, 'paymentfail.html')
             else:
- 
+
                 # if signature verification fails.
                 return render(request, 'paymentfail.html')
         except:
- 
+
             # if we don't find the required parameters in POST data
             return HttpResponseBadRequest()
     else:

@@ -1,0 +1,397 @@
+{% extends "header_footer.html" %}
+{% load static %}
+{% block content %}
+
+<div class="navbar-area">
+<div class="mobile-responsive-nav">
+<div class="container">
+<div class="mobile-responsive-menu">
+<div class="logo">
+<a href="index.html">
+<img src="{% static 'assets/images/logo.webp' %}" alt="logo">
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="desktop-nav">
+<div class="container-fluid">
+<nav class="navbar navbar-expand-md navbar-light">
+<a class="navbar-brand" href="index.html">
+<img src="{% static 'assets/images/logo.webp' %}" alt="logo">
+</a>
+<div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+<ul class="navbar-nav me-auto">
+<li class="nav-item">
+<a href="#" class="nav-link dropdown-toggle">
+Home
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a href="index.html" class="nav-link">Home Demo One</a>
+</li>
+<li class="nav-item">
+<a href="index-2.html" class="nav-link">Home Demo Two</a>
+</li>
+<li class="nav-item">
+<a href="index-3.html" class="nav-link">Home Demo Three</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="about.html" class="nav-link">About Us</a>
+</li>
+<li class="nav-item">
+<a href="#" class="nav-link dropdown-toggle">
+Pages
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a href="team.html" class="nav-link">Team</a>
+</li>
+<li class="nav-item">
+<a href="testimonials.html" class="nav-link">Testimonials</a>
+</li>
+<li class="nav-item">
+<a href="faq.html" class="nav-link">FAQ</a>
+</li>
+<li class="nav-item">
+<a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
+</li>
+<li class="nav-item">
+<a href="terms-condition.html" class="nav-link">Terms And Condition</a>
+</li>
+<li class="nav-item">
+<a href="search-result.html" class="nav-link">Search Result</a>
+</li>
+<li class="nav-item">
+<a href="store-location.html" class="nav-link">Store Location</a>
+</li>
+<li class="nav-item">
+<a href="#" class="nav-link dropdown-toggle">
+Users
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a href="my-account.html" class="nav-link">My Account</a>
+</li>
+<li class="nav-item">
+<a href="login.html" class="nav-link">Login</a>
+</li>
+<li class="nav-item">
+<a href="register.html" class="nav-link">Register</a>
+</li>
+<li class="nav-item">
+<a href="forgot-password.html" class="nav-link">Forgot Password</a>
+</li>
+<li class="nav-item">
+<a href="reset-password.html" class="nav-link">Reset Password</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="coming-soon.html" class="nav-link">Coming Soon</a>
+</li>
+<li class="nav-item">
+<a href="404.html" class="nav-link">404 Page</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="#" class="nav-link dropdown-toggle">
+ Shop
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a href="#" class="nav-link dropdown-toggle">
+Shop Style
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a href="shop-full-width.html" class="nav-link">Shop Full width</a>
+</li>
+<li class="nav-item">
+<a href="shop-left-sidebar.html" class="nav-link">Shop Left Sidebar</a>
+</li>
+<li class="nav-item">
+<a href="shop-right-sidebar.html" class="nav-link">Shop Right Sidebar</a>
+</li>
+<li class="nav-item">
+<a href="shop-grid-view-2.html" class="nav-link">Shop Grid view 2</a>
+</li>
+<li class="nav-item">
+<a href="shop-grid-view-3.html" class="nav-link">Shop Grid view 3</a>
+</li>
+<li class="nav-item">
+<a href="shop-grid-view-4.html" class="nav-link">Shop Grid view 4</a>
+</li>
+<li class="nav-item">
+<a href="shop-list-view.html" class="nav-link">Shop List View</a>
+</li>
+<li class="nav-item">
+<a href="shop-With-pagination.html" class="nav-link">Shop With Pagination</a>
+</li>
+<li class="nav-item">
+<a href="shop-With-show-more.html" class="nav-link">Shop With Show More</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="#" class="nav-link dropdown-toggle">
+Single Product
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a href="product-with-sidebar.html" class="nav-link">Product With Sidebar</a>
+</li>
+<li class="nav-item">
+<a href="product-without-sidebar.html" class="nav-link">Product Without Sidebar</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="cart.html" class="nav-link">Cart</a>
+</li>
+<li class="nav-item">
+ <a href="wishlist.html" class="nav-link">Wishlist</a>
+</li>
+<li class="nav-item">
+<a href="checkout.html" class="nav-link">Checkout</a>
+</li>
+<li class="nav-item">
+<a href="compare.html" class="nav-link">Compare</a>
+</li>
+<li class="nav-item">
+<a href="order-tracking.html" class="nav-link">Order Tracking</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="#" class="nav-link dropdown-toggle">
+Blog
+</a>
+<ul class="dropdown-menu">
+<li class="nav-item">
+<a href="blog-grid.html" class="nav-link">Blog Grid</a>
+</li>
+<li class="nav-item">
+<a href="blog-left-sidebar.html" class="nav-link">Blog Left Sidebar</a>
+</li>
+<li class="nav-item">
+<a href="blog-right-sidebar.html" class="nav-link">Blog Right Sidebar</a>
+</li>
+<li class="nav-item">
+<a href="blog-details-with-sidebar.html" class="nav-link">Blog Details With Sidebar</a>
+</li>
+<li class="nav-item">
+<a href="blog-details-without-sidebar.html" class="nav-link">Blog Details Without Sidebar</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="contact-us.html" class="nav-link active">Contact Us</a>
+</li>
+</ul>
+<div class="others-options">
+<div class="option-item">
+<div class="search-bar">
+<form>
+<div class="from-group">
+<input type="text" placeholder="Search" class="form-control">
+<i class="flaticon-search"></i>
+</div>
+</form>
+</div>
+</div>
+<div class="option-item">
+<a href="compare.html" class="nav-btn">
+<div class="icon">
+<i class="flaticon-compare"></i>
+<span>8</span>
+</div>
+Compare
+</a>
+</div>
+<div class="option-item">
+<a href="wishlist.html" class="nav-btn">
+<div class="icon">
+<i class="flaticon-heart"></i>
+ <span>6</span>
+</div>
+Wishlist
+</a>
+</div>
+<div class="option-item">
+<a href="cart.html" class="nav-btn">
+<div class="icon">
+<img src="{% static 'assets/images/icon/cart-icon.svg' %}" alt="icon">
+<span>2</span>
+</div>
+Cart
+</a>
+</div>
+</div>
+</div>
+</nav>
+</div>
+</div>
+<div class="others-option-for-responsive">
+<div class="container">
+<div class="dot-menu">
+<div class="others-options justify-content-center align-items-center">
+<div class="option-item">
+<div class="inner">
+<i class="fa-solid fa-magnifying-glass"></i>
+</div>
+</div>
+<div class="option-item">
+<a href="wishlist.html" class="nav-btn">
+<div class="icon">
+<i class="flaticon-heart"></i>
+<span>6</span>
+</div>
+</a>
+</div>
+<div class="option-item">
+<a href="cart.html" class="nav-btn">
+<div class="icon">
+<i class="flaticon-shopping-bag"></i>
+<span>2</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="option-inner">
+<div class="nav-search-bar">
+<div class="search-box">
+<form>
+<input type="text" class="form-control" placeholder="Search">
+<button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="page-banner-area bg-1">
+<div class="container">
+<div class="page-banner-content">
+<h1>Contact Us</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li>Contact</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div class="contact-area pt-70 pb-45">
+<div class="container">
+<div class="section-title style2 text-center">
+<span class="sub-title">Contact Us</span>
+<h2>Don’t Hesitate To Contact Us</h2>
+</div>
+<div class="row">
+<div class="col-lg-4">
+<div class="single-contact-card">
+<div class="icon">
+ <i class="fa-solid fa-location-dot"></i>
+</div>
+<div class="content">
+<h3>Our Location</h3>
+<span>CA 560 bush st & 20th ave, apt 5 san francisco,230909, canada</span>
+</div>
+</div>
+<div class="single-contact-card">
+<div class="icon">
+<i class="fa-solid fa-envelope"></i>
+</div>
+<div class="content">
+<h3>Sent Us Email</h3>
+<a href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection#91f9f4fdfdfed1f4e7f8f3bff2fefc"><span class="__cf_email__" data-cfemail="d1b9b4bdbdbe91b4a7b8b3ffb2bebc">[email&#160;protected]</span></a>
+<a href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection#1871767e77587d6e717a367b7775"><span class="__cf_email__" data-cfemail="b7ded9d1d8f7d2c1ded599d4d8da">[email&#160;protected]</span></a>
+</div>
+</div>
+<div class="single-contact-card">
+<div class="icon">
+<i class="fa-solid fa-phone"></i>
+</div>
+<div class="content">
+<h3>Phone Number</h3>
+<a href="tel:09809809809">098-098-098-09</a>
+<a href="tel:09809809809878">098-098-098-098-78</a>
+</div>
+</div>
+</div>
+<div class="col-lg-8">
+<div class="contact-form">
+<form id="contactForm">
+<div class="row">
+<div class="col-lg-6 col-md-6">
+<div class="form-group">
+<input type="text" name="name" id="name" class="form-control" required data-error="Please enter your name" placeholder="Name">
+<div class="help-block with-errors"></div>
+</div>
+</div>
+<div class="col-lg-6 col-md-6">
+<div class="form-group">
+<input type="email" name="email" id="email" class="form-control" required data-error="Please enter your email" placeholder="Email">
+<div class="help-block with-errors"></div>
+</div>
+</div>
+<div class="col-lg-6 col-md-6">
+<div class="form-group">
+<input type="text" name="phone_number" id="phone_number" required data-error="Please enter your number" placeholder="Phone" class="form-control">
+<div class="help-block with-errors"></div>
+</div>
+</div>
+<div class="col-lg-6 col-md-6">
+<div class="form-group">
+<input type="text" name="msg_subject" id="msg_subject" placeholder="Subject" class="form-control" required data-error="Please enter your subject">
+<div class="help-block with-errors"></div>
+</div>
+</div>
+</div>
+<div class="col-lg-12">
+<div class="form-group">
+<textarea name="message" class="form-control" id="message" cols="30" rows="6" placeholder="Message" required data-error="Write your message"></textarea>
+ <div class="help-block with-errors"></div>
+</div>
+</div>
+<div class="col-lg-12">
+<div class="form-group">
+<div class="form-check">
+<input name="gridCheck" value="I agree to the terms and privacy policy." class="form-check-input" type="checkbox" id="gridCheck" required>
+<label class="form-check-label" for="gridCheck">
+I accept the <a href="terms-condition.html">terms and conditions</a> in our <a href="privacy-policy.html">privacy policy</a>
+</label>
+<div class="help-block with-errors gridCheck-error"></div>
+</div>
+</div>
+</div>
+<button type="submit" class="default-btn style5">
+<span>Send Message</span>
+</button>
+<div id="msgSubmit" class="h3 text-center hidden"></div>
+<div class="clearfix"></div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="map-area">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689886.6482586036!2d18.222869767132007!3d48.82306781109595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4715f29294ef3939%3A0xdf8d87a1716ba6a0!2sZakopane%2C%20Poland!5e0!3m2!1sen!2sbd!4v1670930289202!5m2!1sen!2sbd" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+
+
+{% endblock %}
