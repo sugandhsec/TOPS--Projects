@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from app_crud.models import *
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from app_crud.serializers import  *
 
 # Create your views here.
 def index(request):
@@ -34,3 +37,9 @@ def delete(request,pk):
     user_value.delete()
     user_data=User.objects.all()
     return render(request,"index.html",{"user_data":user_data})
+
+class getuser(APIView):
+    def get(self,request):
+        user_data=User.objects.all()
+        serailized_data=UserSerializer(user_data,many=True)
+        return Response(serailized_data.data)

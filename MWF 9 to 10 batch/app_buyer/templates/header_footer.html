@@ -175,23 +175,29 @@
                 <li class="nav-item">
                   <a href="#" class="nav-link dropdown-toggle"> Pages </a>
                   <ul class="dropdown-menu">
+                    {% if session_user_data %}
+                    <li class="nav-item">
+                      <a href="{% url 'profile' %}" class="nav-link">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
                       <a href="{% url 'register' %}" class="nav-link"
                         >Register</a
                       >
                     </li>
                     <li class="nav-item">
-                      <a href="testimonials.html" class="nav-link"
-                        >Testimonials</a
+                      <a href="{% url 'login' %}" class="nav-link"
+                        >Login</a
                       >
                     </li>
                     <li class="nav-item">
-                      <a href="faq.html" class="nav-link">FAQ</a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="privacy-policy.html" class="nav-link"
-                        >Privacy Policy</a
+                      <a href="{% url 'seller_index' %}" class="nav-link"
+                        >Seller</a
                       >
+                      {% endif %}
                     </li>
                     <li class="nav-item">
                       <a href="terms-condition.html" class="nav-link"
@@ -690,13 +696,6 @@
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <button
-            type="button"
-            class="close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
             <span aria-hidden="true"><i class="flaticon-close"></i></span>
           </button>
           <div class="row align-items-center">
@@ -806,67 +805,7 @@
       </div>
     </div>
 
-    <div class="modal fade newsletter-modal" id="newsletter-modal">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <button
-            type="button"
-            class="close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">
-              <i class="flaticon-close"></i>
-            </span>
-          </button>
-          <!-- <div class="modal-body">
-            <div class="newsletter-modal-content">
-              <div class="row align-items-center">
-                <div class="col-lg-6 col-md-6">
-                  <div class="newsletter-img">
-                    <img
-                      src="{% static 'assets/images/newsletter-img.webp' %}"
-                      alt="image"
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                  <div class="newsletter-content">
-                    <h3>Subscribe to our newsletter</h3>
-                    <p>Subscribe Our Newsletter To Get Our Update News</p>
-                    <form class="newsletter-form" data-toggle="validator">
-                      <input
-                        type="email"
-                        class="form-control"
-                        placeholder="Your email address"
-                        name="EMAIL"
-                        required
-                        autocomplete="off"
-                      />
-                      <button class="default-btn" type="submit">
-                        Subscribe Now
-                      </button>
-                      <div id="validator-newsletter" class="form-result"></div>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value=""
-                          id="popupcheck"
-                        />
-                        <label class="form-check-label" for="popupcheck">
-                          Don’t show this popup again
-                        </label>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-        </div>
-      </div>
-    </div>
+
 
     <div class="go-top">
       <i class="fa-solid fa-arrow-up-long"></i>

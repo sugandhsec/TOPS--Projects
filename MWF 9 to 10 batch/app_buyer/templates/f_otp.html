@@ -1,0 +1,70 @@
+{% extends "header_footer.html" %} {% load static %} {% block content %}
+
+<div class="page-banner-area bg-1">
+  <div class="container">
+    <div class="page-banner-content">
+      <h1>Register</h1>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li>Register</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="register-area ptb-70">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-9 col-lg-10">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="register-left-content">
+              <div class="register-image">
+                <img
+                  src="{% static 'assets/images/user-image/user-img-2.webp' %}"
+                  alt="image"
+                />
+              </div>
+              <div class="register-btns">
+                <ul>
+                  <li>
+                    <a href="https://www.facebook.com/" target="_blank"
+                      >Continue with Facebook</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://www.google.com/" target="_blank"
+                      >Continue with Google</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://www.apple.com/" target="_blank"
+                      >Continue with Apple</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="register-content">
+              <p style="color: red; font-size: 24px">{{msg}}</p>
+              <h3>Create An Account</h3>
+              <p>Already have an account? <a href="login.html">Login</a></p>
+              <form action="{% url 'fotp' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label>ENTER OTP</label>
+                  <input type="text" name="otp" class="form-control" />
+                </div>
+                <button type="submit" class="default-btn style5">verify</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

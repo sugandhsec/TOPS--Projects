@@ -20,5 +20,6 @@ from app_crud import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('update/<int:pk>', views.update, name='update'),
-    path('delete/<int:pk>', views.delete, name='delete')
+    path('delete/<int:pk>', views.delete, name='delete'),
+    path('api/getuser', views.getuser.as_view())
 ]

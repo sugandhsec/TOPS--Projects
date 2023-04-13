@@ -1,0 +1,82 @@
+{% extends 'header_footer.html' %}
+{% load static %}
+{% block content%}
+
+<div class="page-banner-area bg-1">
+<div class="container">
+<div class="page-banner-content">
+<h1>Frequently Asked Question</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li>FAQ</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div class="faq-area ptb-70">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-lg-5">
+<div class="faq-image">
+<div class="image-one">
+<img src="{% static 'assets/images/faq/faq-img-1.webp' %}" alt="image">
+</div>
+<div class="image-two">
+ <img src="{% static 'assets/images/faq/faq-img-2.webp' %}" alt="image">
+</div>
+</div>
+</div>
+<div class="col-lg-7">
+<div class="faq-accordion">
+<div class="faq-title">
+<span>FAQ</span>
+<h2>Need To Ask Some Questions Or Check Questions</h2>
+</div>
+<div class="accordion">
+<div class="accordion-item">
+<div class="accordion-title active">
+<i class="fa-solid fa-plus"></i>
+How Will My Order Be Delivered To Me?
+</div>
+<div class="accordion-content show">
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat ut wisi enim veniam lorem dolore magna aliqua.</p>
+</div>
+</div>
+<div class="accordion-item">
+<div class="accordion-title">
+<i class="fa-solid fa-plus"></i>
+How Will I know If Order Is Placed Successfully?
+</div>
+<div class="accordion-content">
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat ut wisi enim veniam lorem dolore magna aliqua.</p>
+</div>
+</div>
+<div class="accordion-item">
+<div class="accordion-title">
+<i class="fa-solid fa-plus"></i>
+How Do I Check The Status Of My Order?
+</div>
+<div class="accordion-content">
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat ut wisi enim veniam lorem dolore magna aliqua.</p>
+</div>
+</div>
+<div class="accordion-item">
+<div class="accordion-title">
+<i class="fa-solid fa-plus"></i>
+What Do I Need To know To Buy Things?
+</div>
+<div class="accordion-content">
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat ut wisi enim veniam lorem dolore magna aliqua.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,226 @@
+{% load static %}
+{% extends 'header_footer.html' %}
+{% block content %}
+
+<div class="page-banner-area bg-1">
+<div class="container">
+<div class="page-banner-content">
+<h1>My Account</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li>My Account</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div class="my-account-area ptb-70">
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-xl-8 col-lg-12">
+<div class="account-content">
+<ul class="account-btns tab-menu">
+<li>
+<a href="#" class="active" data-rel="tab-1">
+ Account Details
+</a>
+</li>
+<li>
+<a href="#" data-rel="tab-2" class="">
+My Address
+</a>
+</li>
+<li>
+<a href="#" data-rel="tab-3" class="">
+Orders
+</a>
+</li>
+<li>
+<a href="#" data-rel="tab-4" class="">
+Track Your Order
+</a>
+</li>
+<li>
+<a href="#" data-rel="tab-5" class="">
+Logout
+</a>
+</li>
+</ul>
+<div class="account-details tab-box" id="tab-1" style="display:block;">
+<h3>Account Details</h3>
+<p>Already have an account? <a href="login.html">Log in instead!</a></p>
+<form>
+<div class="row">
+<div class="col-lg-6 col-md-6">
+<div class="form-group">
+<label>First Name *</label>
+<input type="text" class="form-control">
+</div>
+</div>
+<div class="col-lg-6 col-md-6">
+<div class="form-group">
+<label>Last Name *</label>
+<input type="text" class="form-control">
+</div>
+</div>
+</div>
+<div class="form-group">
+<label>Display Name *</label>
+<input type="text" class="form-control">
+</div>
+<div class="form-group">
+<label>Email Address *</label>
+<input type="email" class="form-control">
+</div>
+<div class="form-group">
+<label>Current Password *</label>
+<input type="password" class="form-control">
+</div>
+<div class="form-group">
+<label>New Password *</label>
+<input type="password" class="form-control">
+</div>
+<div class="form-group">
+<label>Confirm Password *</label>
+<input type="password" class="form-control">
+</div>
+<button type="submit" class="default-btn style5">Save Change</button>
+</form>
+</div>
+<div class="my-address tab-box" id="tab-2">
+<div class="row">
+<div class="col-lg-4 col-md-6">
+<div class="my-address-content">
+<h3>Billing Address</h3>
+<ul>
+<li>3522 Interstate</li>
+<li>75 Business Spur,</li>
+<li>Sault Ste.</li>
+<li>Marie, MI 49783</li>
+<li>New York</li>
+<li><a href="#">Edit</a></li>
+</ul>
+</div>
+</div>
+<div class="col-lg-8 col-md-6">
+<div class="my-address-content">
+<h3>Shipping Address</h3>
+<ul>
+<li>4299 Express Lane</li>
+<li>Sarasota,</li>
+<li>FL 34249 USA</li>
+<li>Phone: 1.941.227.4444</li>
+<li>Sarasota</li>
+<li><a href="#">Edit</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="your-orders tab-box" id="tab-3">
+<h3>Your Orders</h3>
+<div class="orders-table table table-responsive">
+<table class="table border">
+<thead>
+<tr>
+<th scope="col">Order</th>
+<th scope="col">Date</th>
+<th scope="col">Status</th>
+<th scope="col">Total</th>
+<th scope="col">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="order">
+#1357
+</td>
+<td class="date">
+October 31, 2022
+</td>
+<td class="status">
+Completed
+</td>
+<td class="total">
+$125.00 for 2 item
+</td>
+<td class="actions">
+<a href="#">View</a>
+</td>
+</tr>
+<tr>
+<td class="order">
+#2468
+</td>
+<td class="date">
+October 31, 2022
+</td>
+<td class="status">
+Processing
+</td>
+<td class="total">
+$364.00 for 5 item
+</td>
+<td class="actions">
+<a href="#">View</a>
+</td>
+</tr>
+<tr>
+<td class="order">
+#2366
+</td>
+<td class="date">
+October 31, 2022
+</td>
+<td class="status">
+Completed
+</td>
+<td class="total">
+$280.00 for 3 item
+</td>
+<td class="actions">
+<a href="#">View</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="track-order tab-box" id="tab-4">
+<h3>Orders Tracking</h3>
+<p>To track your order please enter your OrderID in the box below and press "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</p>
+<form>
+<div class="form-group">
+<label>Order Id</label>
+<input type="text" placeholder="Found in your order confirmation email." class="form-control">
+</div>
+<div class="form-group">
+<label>Billing Email</label>
+<input type="text" placeholder="Email you used during checkout." class="form-control">
+</div>
+<button type="submit" class="default-btn style5">Track Order</button>
+</form>
+</div>
+<div class="account-logout tab-box" id="tab-5">
+<h3>Logout</h3>
+<form>
+<div class="form-group">
+<label>Email</label>
+<input type="email" placeholder="Enter Your Email" class="form-control">
+</div>
+<div class="form-group">
+<label>Password</label>
+<input type="password" placeholder="*******" class="form-control">
+</div>
+<button type="submit" class="default-btn style5">Logout</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

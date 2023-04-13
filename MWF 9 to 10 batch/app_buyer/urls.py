@@ -17,7 +17,13 @@ from django.urls import path
 from app_buyer import views
 
 urlpatterns = [
-    path('',views.index,name="index"),
-    path('register',views.register,name="register"),
-    path('otp',views.otp,name="otp"),
+    path('', views.index, name="index"),
+    path('register', views.register, name="register"),
+    path('otp', views.otp, name="otp"),
+    path('login', views.login, name="login"),
+    path('profile/', views.profile, name="profile"),
+    path('fotp/', views.fotp, name="fotp"),
+    path('forgot_password/', views.forgot_password, name="forgot_password"),
+    path('reset_password/', views.reset_password, name="reset_password"),
+    path('logout/', views.logout, name="logout"),
 ]
