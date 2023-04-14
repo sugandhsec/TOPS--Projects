@@ -29,6 +29,7 @@ urlpatterns = [
     path("seller_reset_password/", views.seller_reset_password,
          name="seller_reset_password"),
     path("seller_forgot_otp/", views.seller_forgot_otp, name="seller_forgot_otp"),
+    path("add_product/", views.add_product, name="add_product"),
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

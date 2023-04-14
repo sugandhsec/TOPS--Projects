@@ -1,0 +1,162 @@
+{% extends "header_footer.html" %} {% load static %} {% block content %}
+
+<div class="page-banner-area bg-1">
+  <div class="container">
+    <div class="page-banner-content">
+      <h1>Shop FullWidth</h1>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li>Shop</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="shop-area ptb-70">
+  <div class="container">
+    <div class="shop-top-shorting-area">
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-md-6">
+          <div class="shop-shorting-left-content">
+            <ul>
+              <li>
+                <select class="form-select">
+                  <option selected>Filters</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </li>
+              <li>
+                <select class="form-select">
+                  <option selected>Default Sorting</option>
+                  <option value="1">Most popular</option>
+                  <option value="2">New arrivals</option>
+                  <option value="3">Price low to high</option>
+                  <option value="3">Price high to low</option>
+                </select>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="shop-shorting-right-content">
+            <ul>
+              <li>
+                <div class="grid-view-content">
+                  <div class="view-list-row d-none d-lg-block d-md-block">
+                    <div class="view-column">
+                      <a href="#" class="icon-view-four active">
+                        <img
+                          src="assets/images/icon/grid-icon.svg"
+                          alt="icon"
+                        />
+                      </a>
+                      <a href="#" class="view-grid-switch">
+                        <img
+                          src="assets/images/icon/list-icon.svg"
+                          alt="icon"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <p>Showing 1–12 of 36 Results</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="products-collections-filter" class="row justify-content-center">
+      {% for pro in product_data%}
+      
+      <div class="col-lg-3 col-sm-6 products-col-item">
+        <div class="single-shop-card">
+          <div class="shop-image">
+            <img src="{{pro.pimage.url}}" alt="shop" />
+            <ul class="shop-btns">
+              <li
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="Add To Cart"
+              >
+                <a href="cart.html">
+                  <i class="flaticon-add-to-basket"></i>
+                </a>
+              </li>
+              <li
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="Compare"
+              >
+                <a href="compare.html">
+                  <i class="flaticon-swap"></i>
+                </a>
+              </li>
+              <li
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="Add To Wishlist"
+              >
+                <a href="wishlist.html">
+                  <i class="flaticon-heart"></i>
+                </a>
+              </li>
+              <li
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="Quick View"
+              >
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#productsQuickView"
+                >
+                  <i class="flaticon-view"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="content">
+            <h3>
+              <a href="product-with-sidebar.html">{{pro.pname}}</a>
+            </h3>
+            <ul class="info d-flex justify-content-between">
+              <li>
+                <span>{{pro.price}}</span>
+              </li>
+              <li>
+                <div class="rating">
+                  <i class="flaticon-star-1"></i>
+                  <i class="flaticon-star-1"></i>
+                  <i class="flaticon-star-1"></i>
+                  <i class="flaticon-star-1"></i>
+                  <i class="flaticon-star-1"></i>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="default-pagination mt-20">
+      <ul>
+        <li>
+          <a href="#" class="arrow"><i class="flaticon-left-arrow"></i></a>
+        </li>
+        <li><a href="#" class="active">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li>
+          <a href="#" class="arrow"><i class="flaticon-next"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

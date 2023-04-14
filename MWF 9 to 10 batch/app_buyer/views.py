@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from app_buyer.models import *
+from app_seller.models import *
 import random
 from django.conf import settings
 from django.core.mail import send_mail
@@ -176,3 +177,8 @@ def logout(request):
         return render(request, "index.html")
     except:
         return render(request, "index.html")
+
+
+def view_products(request):
+    product_data=Product.objects.all()
+    return render(request,"view_products.html",{"product_data":product_data})
