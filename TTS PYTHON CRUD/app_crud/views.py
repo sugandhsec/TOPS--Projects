@@ -3,6 +3,7 @@ from app_crud.models import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from app_crud.serializers import  *
+import requests
 
 # Create your views here.
 def index(request):
@@ -43,3 +44,7 @@ class getuser(APIView):
         user_data=User.objects.all()
         serailized_data=UserSerializer(user_data,many=True)
         return Response(serailized_data.data)
+
+def apidata(request):
+    response=requests.get("https://covid-api.com/api/regions").json()
+    return render(request,"covid.html",{"response":response})

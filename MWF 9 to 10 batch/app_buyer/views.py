@@ -180,5 +180,33 @@ def logout(request):
 
 
 def view_products(request):
-    product_data=Product.objects.all()
-    return render(request,"view_products.html",{"product_data":product_data})
+    session_user_data = User.objects.get(email=request.session['email'])
+    product_data = Product.objects.all()
+    return render(request, "view_products.html", {"product_data": product_data, "session_user_data": session_user_data})
+
+
+def product_description(request, pk):
+    session_user_data = User.objects.get(email=request.session['email'])
+    single_product = Product.objects.get(id=pk)
+    return render(request, "product_description.html", {
+        'single_product': single_product, "session_user_data": session_user_data})
+
+
+def add_to_cart(request, pk):
+    session_user_data = User.objects.get(email=request.session['email'])
+    if request.method == "POST":
+        usr = User.objects.get(email=request.session['email'])
+        try:
+            cart_exist = Cart.objects.get(product=pk, user=usr)
+            cart_exist.quantity = cart_exist.quantity+1
+            cart_exist.save()
+        except:
+            prod = Product.objects.get(id=pk)
+            Cart.objects.create(
+                product=prod,
+                user=usr,
+                quantity=1
+            )
+        single_product = Product.objects.get(id=pk)
+        return render(request, "product_description.html", {
+            'single_product': single_product, "msg": "Cart Added Succesfully", "session_user_data": session_user_data})

@@ -27,4 +27,8 @@ urlpatterns = [
     path('reset_password/', views.reset_password, name="reset_password"),
     path('logout/', views.logout, name="logout"),
     path('view_products/', views.view_products, name="view_products"),
+    path('product_description/<int:pk>', views.product_description,
+         name="product_description"),
+    path('add_to_cart/<int:pk>', views.add_to_cart,
+         name="add_to_cart"),
 ]
