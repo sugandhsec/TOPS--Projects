@@ -31,4 +31,7 @@ urlpatterns = [
          name="product_description"),
     path('add_to_cart/<int:pk>', views.add_to_cart,
          name="add_to_cart"),
+    path('view_cart/', views.view_cart,
+         name="view_cart"),
+    path('paymenthandler/', views.paymenthandler, name='paymenthandler'),
 ]

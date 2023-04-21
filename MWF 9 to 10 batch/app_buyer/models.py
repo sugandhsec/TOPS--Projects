@@ -15,6 +15,7 @@ class Cart(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     quantity=models.IntegerField(default=0)
+    total = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.quantity)+" "+self.product.pname

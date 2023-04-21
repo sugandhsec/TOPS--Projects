@@ -1,3 +1,6 @@
+from django.http import HttpResponseBadRequest
+from django.views.decorators.csrf import csrf_exempt
+import razorpay
 from django.shortcuts import render
 from app_buyer.models import *
 from app_seller.models import *
@@ -199,14 +202,78 @@ def add_to_cart(request, pk):
         try:
             cart_exist = Cart.objects.get(product=pk, user=usr)
             cart_exist.quantity = cart_exist.quantity+1
+            cart_exist.total=int(cart_exist.quantity)*int(cart_exist.product.price)
             cart_exist.save()
         except:
             prod = Product.objects.get(id=pk)
             Cart.objects.create(
                 product=prod,
                 user=usr,
-                quantity=1
+                quantity=1,
+                total=prod.price
             )
         single_product = Product.objects.get(id=pk)
         return render(request, "product_description.html", {
             'single_product': single_product, "msg": "Cart Added Succesfully", "session_user_data": session_user_data})
+
+
+def view_cart(request):
+    user_data = User.objects.get(email=request.session['email'])
+    total_cart=Cart.objects.filter(user=user_data)
+    final_total=0
+    for i in total_cart:
+        final_total+=i.total
+    return render(request,"cart.html",{"total_cart":total_cart,"final_total":final_total})
+
+
+# authorize razorpay client with API Keys.
+razorpay_client = razorpay.Client(
+	auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
+
+# we need to csrf_exempt this url as
+# POST request will be made by Razorpay
+# and it won't have the csrf token.
+@csrf_exempt
+def paymenthandler(request):
+
+	# only accept POST request.
+	if request.method == "POST":
+		try:
+
+			# get the required parameters from post request.
+			payment_id = request.POST.get('razorpay_payment_id', '')
+			razorpay_order_id = request.POST.get('razorpay_order_id', '')
+			signature = request.POST.get('razorpay_signature', '')
+			params_dict = {
+				'razorpay_order_id': razorpay_order_id,
+				'razorpay_payment_id': payment_id,
+				'razorpay_signature': signature
+			}
+
+			# verify the payment signature.
+			result = razorpay_client.utility.verify_payment_signature(
+				params_dict)
+			if result is not None:
+				amount = 20000  # Rs. 200
+				try:
+
+					# capture the payemt
+					razorpay_client.payment.capture(payment_id, amount)
+
+					# render success page on successful caputre of payment
+					return render(request, 'paymentsuccess.html')
+				except:
+
+					# if there is an error while capturing payment.
+					return render(request, 'paymentfail.html')
+			else:
+
+				# if signature verification fails.
+				return render(request, 'paymentfail.html')
+		except:
+
+			# if we don't find the required parameters in POST data
+			return HttpResponseBadRequest()
+	else:
+    	# if other than POST request is made.
+		return HttpResponseBadRequest()
