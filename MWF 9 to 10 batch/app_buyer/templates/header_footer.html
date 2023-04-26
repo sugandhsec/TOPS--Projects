@@ -2,6 +2,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% comment %} <script>
+     setInterval(function() {
+    $.getJSON('/check_session/', function(data) {
+        if (!data.session_active) {
+            window.location.href = '/login/'; // replace with your redirect URL
+        }
+    });
+}, 1000);
+    </script> {% endcomment %}
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -178,6 +187,9 @@
                     {% if session_user_data %}
                     <li class="nav-item">
                       <a href="{% url 'profile' %}" class="nav-link">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'send_msg' %}" class="nav-link">send Message</a>
                     </li>
                     <li class="nav-item">
                       <a href="{% url 'logout' %}" class="nav-link">Logout</a>
@@ -383,12 +395,14 @@
               <div class="others-options">
                 <div class="option-item">
                   <div class="search-bar">
-                    <form>
+                    <form action="{% url 'search' %}" method="post">
+                      {% csrf_token %}
                       <div class="from-group">
                         <input
                           type="text"
                           placeholder="Search"
                           class="form-control"
+                          name="ser"
                         />
                         <i class="flaticon-search"></i>
                       </div>

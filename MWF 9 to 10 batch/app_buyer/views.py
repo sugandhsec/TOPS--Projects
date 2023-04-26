@@ -1,3 +1,8 @@
+from django.utils.encoding import force_str
+from messagebird_config import client
+from sms import send_sms
+from django.http import JsonResponse
+from django.db.models import Q
 from django.http import HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 import razorpay
@@ -11,8 +16,6 @@ from django.contrib.auth.hashers import make_password, check_password
 
 
 # Create your views here.
-
-# session_user_data = User.objects.get(email=request.session['email'])
 
 def index(request):
     try:
@@ -195,14 +198,24 @@ def product_description(request, pk):
         'single_product': single_product, "session_user_data": session_user_data})
 
 
-def add_to_cart(request, pk):
-    session_user_data = User.objects.get(email=request.session['email'])
+def search(request):
     if request.method == "POST":
+        query = request.POST['ser']
+        product_data = Product.objects.filter(
+            Q(pname__icontains=query) | Q(desc__icontains=query))
+        session_user_data = User.objects.get(email=request.session['email'])
+        return render(request, "view_products.html", {"product_data": product_data, "session_user_data": session_user_data})
+
+
+def add_to_cart(request, pk):
+        session_user_data = User.objects.get(email=request.session['email'])
+    # if request.method == "POST":
         usr = User.objects.get(email=request.session['email'])
         try:
             cart_exist = Cart.objects.get(product=pk, user=usr)
             cart_exist.quantity = cart_exist.quantity+1
-            cart_exist.total=int(cart_exist.quantity)*int(cart_exist.product.price)
+            cart_exist.total = int(cart_exist.quantity) * \
+                int(cart_exist.product.price)
             cart_exist.save()
         except:
             prod = Product.objects.get(id=pk)
@@ -215,65 +228,111 @@ def add_to_cart(request, pk):
         single_product = Product.objects.get(id=pk)
         return render(request, "product_description.html", {
             'single_product': single_product, "msg": "Cart Added Succesfully", "session_user_data": session_user_data})
-
+    # else:
+        return view_products(request)
 
 def view_cart(request):
-    user_data = User.objects.get(email=request.session['email'])
-    total_cart=Cart.objects.filter(user=user_data)
-    final_total=0
+    try:
+        session_user_data = User.objects.get(email=request.session['email'])
+        total_cart = Cart.objects.filter(user=session_user_data)
+        final_total = 0
+        for i in total_cart:
+            final_total += i.total
+        return render(request, "cart.html", {"total_cart": total_cart, "final_total": final_total, "session_user_data": session_user_data})
+    except:
+        return render(request, "index.html")
+
+
+def update_cart(request):
+    session_user_data = User.objects.get(email=request.session['email'])
+    total_cart = Cart.objects.filter(user=session_user_data)
+    quantity_list = request.POST.getlist('qty')
+    print(quantity_list)
+    m = 0
+    final_total = 0
     for i in total_cart:
-        final_total+=i.total
-    return render(request,"cart.html",{"total_cart":total_cart,"final_total":final_total})
+        i.quantity = int(quantity_list[m])
+        m += 1
+        i.total = int(i.quantity) * \
+            int(i.product.price)
+        final_total += i.total
+        i.save()
+    return render(request, "cart.html", {"total_cart": total_cart, "final_total": final_total, "session_user_data": session_user_data})
+
+
+def delete_cart(request, pk):
+    cart_data = Cart.objects.get(id=pk)
+    cart_data.delete()
+    return view_cart(request)
 
 
 # authorize razorpay client with API Keys.
 razorpay_client = razorpay.Client(
-	auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
+    auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
 
 # we need to csrf_exempt this url as
 # POST request will be made by Razorpay
 # and it won't have the csrf token.
+
+
 @csrf_exempt
 def paymenthandler(request):
 
-	# only accept POST request.
-	if request.method == "POST":
-		try:
+    # only accept POST request.
+    if request.method == "POST":
+        try:
 
-			# get the required parameters from post request.
-			payment_id = request.POST.get('razorpay_payment_id', '')
-			razorpay_order_id = request.POST.get('razorpay_order_id', '')
-			signature = request.POST.get('razorpay_signature', '')
-			params_dict = {
-				'razorpay_order_id': razorpay_order_id,
-				'razorpay_payment_id': payment_id,
-				'razorpay_signature': signature
-			}
+            # get the required parameters from post request.
+            payment_id = request.POST.get('razorpay_payment_id', '')
+            razorpay_order_id = request.POST.get('razorpay_order_id', '')
+            signature = request.POST.get('razorpay_signature', '')
+            params_dict = {
+                'razorpay_order_id': razorpay_order_id,
+                'razorpay_payment_id': payment_id,
+                'razorpay_signature': signature
+            }
 
-			# verify the payment signature.
-			result = razorpay_client.utility.verify_payment_signature(
-				params_dict)
-			if result is not None:
-				amount = 20000  # Rs. 200
-				try:
+            # verify the payment signature.
+            result = razorpay_client.utility.verify_payment_signature(
+                params_dict)
+            if result is not None:
+                amount = 20000  # Rs. 200
+                try:
 
-					# capture the payemt
-					razorpay_client.payment.capture(payment_id, amount)
+                    # capture the payemt
+                    razorpay_client.payment.capture(payment_id, amount)
 
-					# render success page on successful caputre of payment
-					return render(request, 'paymentsuccess.html')
-				except:
+                    # render success page on successful caputre of payment
+                    return render(request, 'paymentsuccess.html')
+                except:
 
-					# if there is an error while capturing payment.
-					return render(request, 'paymentfail.html')
-			else:
+                    # if there is an error while capturing payment.
+                    return render(request, 'paymentfail.html')
+            else:
 
-				# if signature verification fails.
-				return render(request, 'paymentfail.html')
-		except:
+                # if signature verification fails.
+                return render(request, 'paymentfail.html')
+        except:
 
-			# if we don't find the required parameters in POST data
-			return HttpResponseBadRequest()
-	else:
-    	# if other than POST request is made.
-		return HttpResponseBadRequest()
+            # if we don't find the required parameters in POST data
+            return HttpResponseBadRequest()
+    else:
+        # if other than POST request is made.
+        return HttpResponseBadRequest()
+
+
+# def check_session(request):
+#     if request.session.get_expiry_age() <= 0:
+#         return JsonResponse({'session_active': False})
+#     else:
+#         return JsonResponse({'session_active': True})
+
+def send_msg(request):
+    if request.method == "POST":
+        message = client.messages.create(
+            'Your message text',
+            {'recipient': '+919773169303'}
+        )
+        return render(request, "contact-us.html", {"msg": "Message send"})
+    else:
+        return render(request, "contact-us.html")

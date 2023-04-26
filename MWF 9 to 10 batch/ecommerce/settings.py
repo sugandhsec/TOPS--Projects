@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app_buyer',
-    'app_seller'
+    'app_seller',
+    'otp_messagebird',
 ]
 # PASSWORD_HASHERS = [
 #     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 #     "django.contrib.auth.hashers.ScryptPasswordHasher",
 # ]
 MIDDLEWARE = [
+    # 'app_buyer.middleware.SessionTimeoutMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -89,7 +91,10 @@ DATABASES = {
     }
 }
 
-
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# SESSION_COOKIE_AGE = 10
+# LOGIN_REDIRECT_URL = ''
+# SESSION_EXPIRED_REDIRECT_URL = ''
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -135,11 +140,15 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER =  "sugandhgupta.tops@gmail.com"
-EMAIL_HOST_PASSWORD = "doulwpotqtgkxlxr"
+EMAIL_HOST_USER = "sugandhgupta.tops@gmail.com"
+EMAIL_HOST_PASSWORD = "qqlnvcjphqjkaoef"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 RAZOR_KEY_ID = "rzp_test_vv7EUBh75scoR5"
 RAZOR_KEY_SECRET = "6xChDdEdLkEFoaGXTgLlGzHD"
+
+SMS_BACKEND = 'sms.backends.messagebird.SmsBackend'
+MESSAGEBIRD_ACCESS_KEY = 'pJObe60Ysuul68nalyqmjPa3F'
+# SMS_BACKEND = 'sms.backends.locmem.SmsBackend'

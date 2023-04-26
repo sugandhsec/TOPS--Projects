@@ -17,6 +17,8 @@ from django.urls import path
 from app_buyer import views
 
 urlpatterns = [
+    # path('check_session/', views.check_session, name='check_session'),
+
     path('', views.index, name="index"),
     path('register', views.register, name="register"),
     path('otp', views.otp, name="otp"),
@@ -27,11 +29,16 @@ urlpatterns = [
     path('reset_password/', views.reset_password, name="reset_password"),
     path('logout/', views.logout, name="logout"),
     path('view_products/', views.view_products, name="view_products"),
+    path('search/', views.search, name="search"),
     path('product_description/<int:pk>', views.product_description,
          name="product_description"),
     path('add_to_cart/<int:pk>', views.add_to_cart,
          name="add_to_cart"),
+    path('delete_cart/<int:pk>', views.delete_cart,
+         name="delete_cart"),
     path('view_cart/', views.view_cart,
          name="view_cart"),
     path('paymenthandler/', views.paymenthandler, name='paymenthandler'),
+    path('send_msg/', views.send_msg, name='send_msg'),
+    path('update_cart/', views.update_cart, name='update_cart'),
 ]
