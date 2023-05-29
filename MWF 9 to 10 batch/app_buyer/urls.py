@@ -41,4 +41,8 @@ urlpatterns = [
     path('paymenthandler/', views.paymenthandler, name='paymenthandler'),
     path('send_msg/', views.send_msg, name='send_msg'),
     path('update_cart/', views.update_cart, name='update_cart'),
+    path('region/', views.region, name='region'),
+    path('api/products/', views.productlist.as_view()),
+
+
 ]

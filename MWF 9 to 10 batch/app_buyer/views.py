@@ -1,3 +1,7 @@
+from rest_framework.views import APIView
+from app_buyer.serializers import *
+from rest_framework.response import Response
+import requests
 from django.utils.encoding import force_str
 from messagebird_config import client
 from sms import send_sms
@@ -208,28 +212,29 @@ def search(request):
 
 
 def add_to_cart(request, pk):
-        session_user_data = User.objects.get(email=request.session['email'])
+    session_user_data = User.objects.get(email=request.session['email'])
     # if request.method == "POST":
-        usr = User.objects.get(email=request.session['email'])
-        try:
-            cart_exist = Cart.objects.get(product=pk, user=usr)
-            cart_exist.quantity = cart_exist.quantity+1
-            cart_exist.total = int(cart_exist.quantity) * \
-                int(cart_exist.product.price)
-            cart_exist.save()
-        except:
-            prod = Product.objects.get(id=pk)
-            Cart.objects.create(
-                product=prod,
-                user=usr,
-                quantity=1,
-                total=prod.price
-            )
-        single_product = Product.objects.get(id=pk)
-        return render(request, "product_description.html", {
-            'single_product': single_product, "msg": "Cart Added Succesfully", "session_user_data": session_user_data})
+    usr = User.objects.get(email=request.session['email'])
+    try:
+        cart_exist = Cart.objects.get(product=pk, user=usr)
+        cart_exist.quantity = cart_exist.quantity+1
+        cart_exist.total = int(cart_exist.quantity) * \
+            int(cart_exist.product.price)
+        cart_exist.save()
+    except:
+        prod = Product.objects.get(id=pk)
+        Cart.objects.create(
+            product=prod,
+            user=usr,
+            quantity=1,
+            total=prod.price
+        )
+    single_product = Product.objects.get(id=pk)
+    return render(request, "product_description.html", {
+        'single_product': single_product, "msg": "Cart Added Succesfully", "session_user_data": session_user_data})
     # else:
-        return view_products(request)
+    return view_products(request)
+
 
 def view_cart(request):
     try:
@@ -336,3 +341,15 @@ def send_msg(request):
         return render(request, "contact-us.html", {"msg": "Message send"})
     else:
         return render(request, "contact-us.html")
+
+
+def region(request):
+    all_regions = requests.get("https://covid-api.com/api/regions").json()
+    return render(request, "region_page.html", {"all_regions": all_regions})
+
+
+class productlist(APIView):
+    def get(self, request):
+        products = Product.objects.all()
+        products_data = ProductSerializer(products, many=True)
+        return Response(products_data.data)

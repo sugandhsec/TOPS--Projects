@@ -1,0 +1,48 @@
+First create a new environement
+
+python -m venv environment_name
+python -m venv myenv
+
+Activating environment 
+
+environment_name\Scripts\activate 
+myenv\Scripts\activate
+
+Install Django inside environement
+pip install django 
+
+Creating New Project 
+
+django-admin startproject projectname .
+django-admin startproject pro_shopping .
+
+Creating applications
+
+django-admin stratapp appname
+django-admin startapp app_buyer
+
+craetimng database
+python manage.py makemigrations
+python manage.py migrate
+
+for running the server
+python manage.py runserver
+
+register your app inside folder setting.py file
+
+INSTALLED_APPS=["app_name"]
+
+
+create a urls.py file in app folder and link it with projects urls.py file
+
+path("",include("app_buyer.urls"))
+
+now in new urls.py file 
+
+from django.urls import path
+
+urlpatterns = [
+    path('' ,  views.home , name='home')
+]
+
+

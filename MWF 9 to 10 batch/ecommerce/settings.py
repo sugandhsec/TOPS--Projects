@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'app_buyer',
     'app_seller',
     'otp_messagebird',
+    'rest_framework'
 ]
 # PASSWORD_HASHERS = [
 #     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
@@ -92,7 +93,7 @@ DATABASES = {
 }
 
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-# SESSION_COOKIE_AGE = 10
+# SESSION_COOKIE_AGE = 30 #seconds
 # LOGIN_REDIRECT_URL = ''
 # SESSION_EXPIRED_REDIRECT_URL = ''
 # Password validation
