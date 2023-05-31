@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import *
 from django.conf import settings
 from django.core.mail import send_mail
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password,check_password
 # Create your views here.
 def index(request):
     return render(request,"index.html")
@@ -46,3 +46,19 @@ def otp(request):
             return render(request,"otp.html",{"msg":"OTP NOT MATCHED"})
     else:
         return render(request,"register.html")
+    
+
+def login(request):
+    if request.method=="POST":
+        try:
+            user_data=User.objects.get(email=request.POST["email"])
+            if check_password(request.POST["password"],user_data.password):
+                return render(request,"four-col.html")
+            else:
+                return render(request,"login.html",{"msg":"Passwrod Not match"})
+        except:
+            return render(request,"login.html",{"msg":"We cannot find an account with that email address"})
+    else:
+        return render(request,"login.html")
+    
+
