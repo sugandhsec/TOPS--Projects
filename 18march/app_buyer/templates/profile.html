@@ -172,6 +172,7 @@ Body Section
               name="fname"
               id="inputFname"
               placeholder="First Name"
+              value={{user_data.firstname}}
             />
           </div>
         </div>
@@ -185,6 +186,7 @@ Body Section
               id="inputLname"
               name="lname"
               placeholder="Last Name"
+              value={{user_data.lastname}}
             />
           </div>
         </div>
@@ -193,7 +195,7 @@ Body Section
             >Email <sup>*</sup></label
           >
           <div class="controls">
-            <input type="text" name="email" placeholder="Email" />
+            <input type="text" name="email" placeholder="Email" value={{user_data.email}}/>
           </div>
         </div>
         <div class="control-group">

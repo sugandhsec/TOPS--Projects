@@ -53,7 +53,8 @@ def login(request):
         try:
             user_data=User.objects.get(email=request.POST["email"])
             if check_password(request.POST["password"],user_data.password):
-                return render(request,"four-col.html")
+                request.session["email"]=request.POST["email"]
+                return render(request,"four-col.html",{"data":request.session["email"]})
             else:
                 return render(request,"login.html",{"msg":"Passwrod Not match"})
         except:
@@ -61,4 +62,10 @@ def login(request):
     else:
         return render(request,"login.html")
     
+def logout(request):
+    del request.session["email"]
+    return render(request,"login.html",{"msg":"Logout Suceesfull"})
 
+def profile(request):
+    user_data=User.objects.get(email=request.session["email"])
+    return render(request,"profile.html",{"user_data":user_data})
