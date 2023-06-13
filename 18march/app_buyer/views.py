@@ -68,4 +68,28 @@ def logout(request):
 
 def profile(request):
     user_data=User.objects.get(email=request.session["email"])
-    return render(request,"profile.html",{"user_data":user_data})
+    return render(request,"profile.html",{"user_data":user_data,"data":request.session["email"]})
+
+def update_profile(request):
+    if request.method=="POST":
+        user_data=User.objects.get(email=request.session["email"])
+        try:
+            request.POST["npassword"]
+            if check_password(request.POST["opassword"],user_data.password):
+                if request.POST["cpassword"]==request.POST["npassword"]:
+                        user_data.firstname=request.POST["fname"]
+                        user_data.lastname=request.POST["lname"]
+                        user_data.password=make_password(request.POST["npassword"])
+                        user_data.save()
+                else:
+                    return render(request,"profile.html",{"user_data":user_data,"msg":"New Password and Confrim Password Not Match","data":request.session["email"]})
+            else:
+                return render(request,"profile.html",{"user_data":user_data,"msg":"Old PAsswrod Not match","data":request.session["email"]})
+        except:
+            user_data.firstname=request.POST["fname"]
+            user_data.lastname=request.POST["lname"]
+            user_data.save()
+        return render(request,"profile.html",{"user_data":user_data,"msg":"Profile Updated Successfully","data":request.session["email"]})
+    else:
+        user_data=User.objects.get(email=request.session["email"])
+        return render(request,"profile.html",{"user_data":user_data,"data":request.session["email"]})

@@ -1,0 +1,32 @@
+1---Create a Environment
+python -m venv environementname
+python -m venv myenv
+
+2----Activate your environementname
+environementname\Scripts\activate 
+myenv\Scripts\activate
+
+
+3----installing Djnago
+pip install django 
+
+4--- craeting project
+django-admin startproject projectname .
+django-admin startproject ecommerce .
+
+5----creating application
+django-admin startapp appname
+django-admin startapp app_crud
+
+6--creating datatbase
+
+python manage.py makemigrations
+python manage.py migrate
+
+7---running your project
+python manage.py runserver
+
+8--linking app with project
+goto settings.py file inside project folder
+
+goto installed_apps section and add our appname

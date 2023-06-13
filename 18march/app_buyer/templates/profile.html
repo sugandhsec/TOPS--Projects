@@ -158,7 +158,7 @@ Body Section
     <h3>Registration</h3>
     <hr class="soft" />
     <div class="well">
-      <form class="form-horizontal" action="{% url 'register' %}" method="post">
+      <form class="form-horizontal" action="{% url 'update_profile' %}" method="post">
         {% csrf_token %}
         <h3>Your Personal Details</h3>
         {{msg}}
@@ -195,13 +195,18 @@ Body Section
             >Email <sup>*</sup></label
           >
           <div class="controls">
-            <input type="text" name="email" placeholder="Email" value={{user_data.email}}/>
+            <input type="text" name="email" placeholder="Email"  value={{user_data.email}} disabled/>
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label">Password <sup>*</sup></label>
+          <label class="control-label"> OLD Password <sup>*</sup></label>
           <div class="controls">
-            <input type="password" name="password" placeholder="Password" />
+            <input type="password" name="opassword" placeholder="Password" />
+          </div>
+        <div class="control-group">
+          <label class="control-label"> New Password <sup>*</sup></label>
+          <div class="controls">
+            <input type="password" name="npassword" placeholder="Password" />
           </div>
           <div class="control-group">
             <label class="control-label">Confirm Password <sup>*</sup></label>
@@ -215,7 +220,7 @@ Body Section
             <input
               type="submit"
               name="submitAccount"
-              value="Register"
+              value="Update Profile"
               class="exclusive shopBtn"
             />
           </div>
