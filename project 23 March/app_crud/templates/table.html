@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td,
+      th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>HTML Table</h2>
+    <a href="{% url 'home' %}"><input type="button" value="Add data" /></a>
+    <table>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Password</th>
+      </tr>
+
+      {% for i in all_data %}
+
+      <tr>
+        <td>{{i.firstname}}</td>
+        <td>{{i.lastname}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.passowrd}}</td>
+        <td><a href="{% url 'update' i.id %}">Update</a></td>
+        <td><a href="{% url 'delete' i.id %}">Delete</a></td>
+      </tr>
+      {% endfor%}
+    </table>
+  </body>
+</html>

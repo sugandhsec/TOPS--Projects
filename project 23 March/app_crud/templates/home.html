@@ -6,7 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    <form>
+    <p>{{msg}}</p>
+    <form action="{% url 'add_data' %}" method="post">
+        {% csrf_token %}
     <label for="firstname">First name: </label>
     <input type="text" name="firstname"  required>
     <br>
@@ -19,7 +21,9 @@
     <label for="password">password: </label>
     <input type="password" name="password"  required>
     <br>
-    <input type="submit" value="Login!">
+    <a href="{% url 'show_data' %}"><input type="button" value="Show data"></a>
+    
+    <input type="submit" value="Add Data">
 </form>
 </body>
 </html>

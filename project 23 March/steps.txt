@@ -30,3 +30,5 @@ python manage.py runserver
 goto settings.py file inside project folder
 
 goto installed_apps section and add our appname
+
+jinja--python code in html

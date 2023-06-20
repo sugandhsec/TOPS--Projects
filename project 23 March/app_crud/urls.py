@@ -18,5 +18,10 @@ from django.urls import path
 from app_crud import views
 
 urlpatterns = [
-   path('', views.home, name='home')
+   path('', views.home, name='home'),
+   path('add_data/', views.add_data, name='add_data'),
+   path('show_data/', views.show_data, name='show_data'),
+   path('update/<int:pk>', views.update, name='update'),
+   path('delete/<int:pk>', views.delete, name='delete'),
+
 ]

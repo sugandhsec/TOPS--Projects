@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>{{msg}}</p>
+    <form action="{% url 'update' one_data.id %}" method="post">
+      {% csrf_token %}
+      <label for="firstname">First name: </label>
+      <input type="text" name="firstname" value="{{one_data.firstname}}" required />
+      <br />
+      <label for="lastname">Last name: </label>
+      <input type="text" name="lastname" value="{{one_data.lastname}}" required />
+      <br />
+      <label for="email">email: </label>
+      <input type="email" name="email" value="{{one_data.email}}" required />
+      <br />
+      <label for="password">password: </label>
+      <input type="password" name="password" value="{{one_data.passowrd}}" required />
+      <br />
+      <a href="{% url 'show_data' %}"
+        ><input type="button" value="Show data"
+      /></a>
+
+      <input type="submit" value="Update Data" />
+    </form>
+  </body>
+</html>

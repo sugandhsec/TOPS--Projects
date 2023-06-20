@@ -158,10 +158,31 @@ Body Section
     <h3>Registration</h3>
     <hr class="soft" />
     <div class="well">
-      <form class="form-horizontal" action="{% url 'update_profile' %}" method="post">
+      <form class="form-horizontal" action="{% url 'update_profile' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <h3>Your Personal Details</h3>
         {{msg}}
+         <div class="thumbnail" style="height: 50px; width: 50px;">
+          
+          <img
+            src="{{user_data.profile_pic.url}}"
+            alt="bootstrap ecommerce templates"
+          />
+         
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputFname"
+            >Profile Image <sup>*</sup></label
+          >
+          <div class="controls">
+            <input
+              type="file"
+              name="propic"
+              id="inputFname"
+              
+            />
+          </div>
+        </div>
         <div class="control-group">
           <label class="control-label" for="inputFname"
             >First name <sup>*</sup></label
