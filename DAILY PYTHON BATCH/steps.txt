@@ -1,0 +1,48 @@
+creating environment
+python -m venv environmentname
+python -m venv myenv
+
+environment activate
+environmentname\Scipts\activate
+myenv\Scipts\activate
+
+installing djnago
+pip install django
+
+creating a project 
+django-admin startproject projectname .
+django-admin startproject pro_ecom
+
+creating a app
+django-admin startapp appname
+django-admin startapp app_buyer
+
+in settings.py register the app
+in ISTALLED_APPS
+[
+
+
+    add your app also
+]
+
+example
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'app_buyer',
+]
+
+creating a database
+
+python manage.py makemigrations
+python manage.py migrate
+
+
+start the server
+
+python manage.py runserver

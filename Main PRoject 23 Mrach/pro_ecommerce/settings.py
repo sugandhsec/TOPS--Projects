@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_buyer'
+    'app_buyer',
+    'app_seller'
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,6 @@ EMAIL_HOST_PASSWORD = 'aitohysnirsupmma'
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+RAZOR_KEY_ID = 'rzp_test_QvROednxgI2SKr'
+RAZOR_KEY_SECRET = 'mkBGqiBKOABsu3sCbyCLjMjS'
