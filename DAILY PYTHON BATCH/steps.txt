@@ -46,3 +46,27 @@ python manage.py migrate
 start the server
 
 python manage.py runserver
+
+
+
+
+database entry command
+
+Tablename.objects.create(
+    fieldname=value,
+    feildname=value,
+    .
+    .
+    .
+    .
+
+)
+
+
+Tablename.objects.all()
+Tablename.objects.get(condition)
+Tablename.objects.filter(condition)
+
+get() ---only one data more than one or less than one will give error
+all() ---i will give all data of table
+filter() ---condition

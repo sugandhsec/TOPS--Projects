@@ -19,4 +19,6 @@ from app_buyer import views
 
 urlpatterns = [
    path('', views.index, name='index'),
+   path('dataentry', views.dataentry, name='dataentry'),
+   path('showdata', views.showdata, name='showdata'),
 ]
