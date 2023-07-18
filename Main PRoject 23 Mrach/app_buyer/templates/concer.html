@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+</style>
+</head>
+<body>
+
+<h2>Country Name</h2>
+{{msg}}
+<form action="{% url 'con_ser'%}" method="post">
+    {%csrf_token%}
+<input type="text" id="myInput" placeholder="Search for names.." title="Type in a name" name="con">
+<input type="submit" id="myInput" value="Search">
+
+</form>
+<table id="myTable">
+ <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>iso3</th>
+            <th>iso2</th>
+            <th>phonecode</th>
+            <th>capital</th>
+            <th>currency</th>
+            <th>native</th>
+        </tr>
+        {% if mydata %}
+        <tr>
+            <td>{{mydata.id}}</td>
+            <td>{{mydata.name}}</td>
+            <td>{{mydata.iso3}}</td>
+            <td>{{mydata.iso2}}</td>
+            <td>{{mydata.phonecode}}</td>
+            <td>{{mydata.capital}}</td>
+            <td>{{mydata.currency}}</td>
+            <td>{{mydata.native}}</td>
+        </tr>
+        {%endif%}
+</table>
+
+</body>
+</html>

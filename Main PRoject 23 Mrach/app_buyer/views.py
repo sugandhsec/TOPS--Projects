@@ -6,30 +6,53 @@ from .models import *
 from app_seller.models import *
 from django.contrib.auth.hashers import make_password,check_password
 from django.db.models import Q
+import requests
 # Create your views here.
 def index(request):
     return render(request,"index.html")
 
 def register(request):
     if request.method=="POST":
-        if request.POST["password"]==request.POST["cpassword"]:
-            global temp
-            temp={
-                "name":request.POST["name"],
-                "email":request.POST["email"],
-                "password":request.POST["password"]
-            }
-            global a
-            a=random.randint(10000000,99999999)
-            subject = 'OTP VERIFICATION FOR MY WEBSITE'
-            message = f'Your OTP IS {a} Valid for 5 mintutes only'
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = [request.POST["email"], ]
-            send_mail( subject, message, email_from, recipient_list )
-            return render(request,"otp.html")
+        import requests
 
+        api_key = 'nSdub6zW.1ffpXB6FFzFYfDlNkY91zQSEGWik7XVW' # Generated in your User Profile it shows at the top in a green bar once
+        team_slug = "sugandh" # when you sign up you have a team, its in the URL then use that
+        email_address = request.POST["email"] # the test email
+
+
+        response = requests.post(
+            "https://app.mailvalidation.io/a/" + team_slug + "/validate/api/validate/",
+            json={'email': email_address},
+            headers={
+                    'content-type': 'application/json',
+                    'accept': 'application/json',
+                    'Authorization': 'Api-Key ' + api_key,
+                    },
+        )
+
+        valid = response.json()['is_valid']
+        if valid:
+            if request.POST["password"]==request.POST["cpassword"]:
+                global temp
+                temp={
+                    "name":request.POST["name"],
+                    "email":request.POST["email"],
+                    "password":request.POST["password"]
+                }
+                global a
+                a=random.randint(10000000,99999999)
+                subject = 'OTP VERIFICATION FOR MY WEBSITE'
+                message = f'Your OTP IS {a} Valid for 5 mintutes only'
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = [request.POST["email"], ]
+                send_mail( subject, message, email_from, recipient_list )
+                return render(request,"otp.html")
+            else:
+                return render(request,"sign.html",{"msg":"Passwordod And confirm passwrod Not MAtch"})
         else:
-           return render(request,"sign.html",{"msg":"Passwordod And confirm passwrod Not MAtch"})  
+             return render(request,"sign.html",{"msg":"Email is Invalid"})
+
+          
     else:
         return render(request,"sign.html")
     
@@ -162,6 +185,7 @@ from django.shortcuts import render
 import razorpay
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+     
 from django.http import HttpResponseBadRequest
 
 
@@ -216,3 +240,57 @@ def paymenthandler(request):
 	else:
 	# if other than POST request is made.
 		return HttpResponseBadRequest()
+
+
+
+def countries(request):
+
+    url = "https://api.countrystatecity.in/v1/countries"
+
+    headers = {
+    "X-CSCAPI-KEY": "UXF2OHQ2WjBMT1Y5Q05MQzVhNE1sT3VJSk02Y3BaNzlRNHRVMHRjZA=="
+    }
+
+    mydata =  requests.request("GET", url, headers=headers)
+    print(mydata.json())
+    return render(request,'country.html',{"mydata":mydata.json()})
+
+
+def single(request):
+    url = "https://api.countrystatecity.in/v1/countries/BD"
+
+    headers = {
+    "X-CSCAPI-KEY": "UXF2OHQ2WjBMT1Y5Q05MQzVhNE1sT3VJSk02Y3BaNzlRNHRVMHRjZA=="
+    }
+
+    mydata = requests.request("GET", url, headers=headers)
+    return render(request,'one_country.html',{"mydata":mydata.json()})
+
+
+def con_ser(request):
+    if request.method=="POST":
+        item=request.POST["con"]
+        url = "https://api.countrystatecity.in/v1/countries"
+
+        headers = {
+        "X-CSCAPI-KEY": "UVY0VEFQZE45dm8xNGtaYTZudTNmYUtHSW9TN1hvZENHSUd3YURSdg=="
+        }
+
+        all_country =  requests.request("GET", url, headers=headers).json()
+        for i in all_country:
+            if i["name"]==item.title():
+                  my_id=i["iso2"]
+        try:
+            url = f"https://api.countrystatecity.in/v1/countries/{my_id}"
+
+            headers = {
+            "X-CSCAPI-KEY": "UVY0VEFQZE45dm8xNGtaYTZudTNmYUtHSW9TN1hvZENHSUd3YURSdg=="
+            }
+
+            mydata = requests.request("GET", url, headers=headers).json()
+            return render(request,'concer.html',{"mydata":mydata})
+        except:
+            return render(request,'concer.html',{"msg":"Not found"})
+    else:
+        return render(request,"concer.html")
+
