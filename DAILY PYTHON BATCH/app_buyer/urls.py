@@ -21,4 +21,6 @@ urlpatterns = [
    path('', views.index, name='index'),
    path('dataentry', views.dataentry, name='dataentry'),
    path('showdata', views.showdata, name='showdata'),
+   path('delete/<int:pk>', views.delete, name='delete'),
+   path('update/<int:pk>', views.update, name='update'),
 ]

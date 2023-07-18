@@ -65,12 +65,12 @@
           <td>{{i.age}}</td>
           <td>{{i.bio}}</td>
           <td>
-            <a href="{% url 'showdata' %}">
+            <a href="{% url 'update' i.id%}">
               <input type="button" class="btn" value="Edit"
             /></a>
           </td>
           <td>
-            <a href="{% url 'showdata' %}">
+            <a href="{% url 'delete' i.id %}">
               <input type="button" class="btn" value="Delete"
             /></a>
           </td>
