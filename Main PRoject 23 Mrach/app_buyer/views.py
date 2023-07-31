@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.conf import settings
 from django.core.mail import send_mail
 import random
@@ -7,7 +7,18 @@ from app_seller.models import *
 from django.contrib.auth.hashers import make_password,check_password
 from django.db.models import Q
 import requests
+
+def login_required_custom(view_func):
+    def wrapper(request, *args, **kwargs):
+        try:
+            request.session["email"]
+        except:
+            return redirect("login")
+        return view_func(request, *args, **kwargs)
+    return wrapper
+
 # Create your views here.
+@login_required_custom
 def index(request):
     return render(request,"index.html")
 
@@ -293,4 +304,23 @@ def con_ser(request):
             return render(request,'concer.html',{"msg":"Not found"})
     else:
         return render(request,"concer.html")
+    
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from app_buyer.models import User
+from app_buyer.serializers import userserializer
+
+	# Create your views here.
+
+@api_view(['GET'])
+def getuser(request):
+        all_data=User.objects.all()
+        serial = userserializer(all_data,many=True)
+        return Response(serial.data)
+
+@api_view(['GET'])
+def getuser_one(request,pk):
+        all_data=User.objects.get(id=pk)
+        serial = userserializer(all_data)
+        return Response(serial.data)

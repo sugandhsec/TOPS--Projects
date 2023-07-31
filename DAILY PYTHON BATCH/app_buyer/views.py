@@ -1,3 +1,4 @@
+import requests
 from django.shortcuts import render
 from app_buyer.models import *
 # Create your views here.
@@ -46,3 +47,17 @@ def update(request,pk):
     else:
         one_data=User.objects.get(id=pk)
         return render(request,"update.html",{"one_data":one_data})
+
+
+def allcountry(request):
+
+    url = "https://api.countrystatecity.in/v1/countries"
+
+    headers = {
+    'X-CSCAPI-KEY': 'UVY0VEFQZE45dm8xNGtaYTZudTNmYUtHSW9TN1hvZENHSUd3YURSdg=='
+    }
+
+    response = requests.request("GET", url, headers=headers)
+    return render(request,"all_country.html",{"response":response.json})
+
+    

@@ -21,4 +21,10 @@ urlpatterns = [
     path('dataentry/', views.dataentry, name='dataentry'),
     path('update\<int:pk>/', views.update, name='update'),
     path('delete\<int:pk>/', views.delete, name='delete'),
+    path('all_user/', views.all_user),
+    path('all_user/<int:pk>', views.one_user),
+    path('del_user/<int:pk>', views.del_user),
+    path('apientry/<str:nm>/<str:em>/<str:mob>', views.apientry),
+
+    
 ]

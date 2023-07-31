@@ -35,4 +35,7 @@ urlpatterns = [
     path('countries/', views.countries, name='countries'),
     path('single/', views.single, name='single'),
     path('con_ser/', views.con_ser, name='con_ser'),
+    path('getuser/', views.getuser),
+    path('getuser/<int:pk>', views.getuser_one),
+    # path('getuser/<str:un>/<str:em>', views.getuser_one),
 ]

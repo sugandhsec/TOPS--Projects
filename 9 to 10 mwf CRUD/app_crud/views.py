@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from app_crud.models import *
+from app_crud.serializers import *
 # Create your views here.
-
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 def index(request):
     user_data=User.objects.all()
     return render(request,"index.html",{"user_data":user_data})
@@ -37,7 +39,56 @@ def delete(request,pk):
     user_data=User.objects.all()
     return render(request,"index.html",{"msg":"Deleted Suceesfully","user_data":user_data})
 
+@api_view(['GET'])
+def all_user(request):
+        all_data=User.objects.all()
+        serial = UserSerial(all_data,many=True)
+        return Response(serial.data)
+@api_view(['GET'])
+def one_user(request,pk):
+        try:
+            all_data=User.objects.get(id=pk)
+            serial = UserSerial(all_data)
+            return Response(serial.data)
+        except:
+             return Response({"Error":"No User Found"})
         
+@api_view(['GET'])
+def apientry(request,nm,em,mob):
+    User.objects.create(
+            name=nm,
+            email=em,
+            mobile=mob
+        )
+    return Response({"Success":"ENTRY SUCCESFULL"})
+
+@api_view(['GET'])
+def del_user(request,pk):
+    try:
+        one_data=User.objects.get(id=pk)
+        one_data.delete()
+        return Response({"Deleted":"deleted Succesfully"})
+
+    except:
+        return Response({"Error":"No User Found"})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """
 get---tablename.objects.get(condition) --one
 filter---tablename.objects.filter(condition) --one or many
